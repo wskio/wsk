@@ -23,8 +23,12 @@
     <script>
       //ha
       var displayMessage = function(msg){
-        $('#chat-log').append();
-        $('<div class="messageContainer">').append;
+        var $container = $('<div class="messageContainer">');
+        var $icon = $('<div class="icon">');
+        var $msg = $('<div class="message">').text(msg);
+        $container.append($icon);
+        $container.append($msg);
+        $('#chat-log').append($container);
       };
 
       $(document).ready(function() {

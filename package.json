@@ -1,0 +1,26 @@
+{
+  "name": "wsk",
+  "version": "0.0.0",
+  "description": "Location based chat system!",
+  "main": "index.js",
+  "dependencies": {
+    "express": "~3.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wskio/wsk.git"
+  },
+  "engines": {
+    "node": "0.10.25"
+  },
+  "author": "Brian, James, Joseph",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/redwoodfavorite/wsk.git"
+  },
+  "homepage": "https://github.com/wskio/wsk"
+}

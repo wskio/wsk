@@ -45,7 +45,13 @@
         var getAllPosts = function(){
           geo.getPointsNearLoc([myPosition.lat, myPosition.lon], 1, function(arr){
             for (var i = 0; i < arr.length; i++) {
-              displayMessage(arr[i]);
+              displayMessage(arr[i].text);
+              var messagePosition = new google.maps.LatLng(arr[i].position[0],arr[i].position[1]);
+              var marker = new google.maps.Marker({
+                position: messagePosition,
+                title: 'Click to zoom'
+              });
+              marker.setMap(map);
             };
           });
         }
@@ -54,7 +60,7 @@
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){
             e.preventDefault();
-            geo.insertByLoc([myPosition.lat,myPosition.lon], $(this).text(), console.log('post was sent!'));
+            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon]}, console.log('post was sent!'));
             displayMessage($(this).text());
             $(this).text('');
           }

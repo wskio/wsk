@@ -9,7 +9,7 @@ var mapInit = function(){
     zoom: 18,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+  map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
   // Try W3C Geolocation (Preferred)
   if(navigator.geolocation) {
@@ -57,4 +57,46 @@ var mapInit = function(){
   // adds marker at position defined below
   google.maps.event.addDomListener(window, 'load', "initialize");
   // marker.setMap(map);
+}
+
+function setMarkers(map, locations) {
+  // Add markers to the map
+
+  // Marker sizes are expressed as a Size of X,Y
+  // where the origin of the image (0,0) is located
+  // in the top left of the image.
+
+  // Origins, anchor positions and coordinates of the marker
+  // increase in the X direction to the right and in
+  // the Y direction down.
+  var image = {
+    url: 'client/img/redcircle.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(50, 50),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 25,25.
+    anchor: new google.maps.Point(25, 25)
+  };
+  // Shapes define the clickable region of the icon.
+  // The type defines an HTML &lt;area&gt; element 'poly' which
+  // traces out a polygon as a series of X,Y points. The final
+  // coordinate closes the poly by connecting to the first
+  // coordinate.
+  var shape = {
+      coord: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+  for (var i = 0; i < locations.length; i++) {
+    var blip = locations[i];
+    var myLatLng = new google.maps.LatLng(blip[1], blip[2]);
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image,
+        shape: shape,
+        title: beach[0],
+        zIndex: beach[3]
+    });
+  }
 }

@@ -14,7 +14,7 @@ body {
   display:block;
   left:0px;
   top:0px;
-  float:top;
+  float:bottom;
 }
 #chat-container {
   height:40%;

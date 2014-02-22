@@ -5,7 +5,7 @@
     <link href="client/css/mobilestyle.css" media="(max-width:800px)" rel="stylesheet" type="text/css">
     <link href="client/css/desktopstyle.css" media="(min-width:800px)" rel="stylesheet" type="text/css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="geoFire/geofire.js"></script>
+    <script src="client/js/geofire.js"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU5HEJgRBcM9NbmGYjIqLUb5GwNnICEXk&sensor=false">
     </script>
@@ -20,6 +20,8 @@
     <script>
       //ha
       $(document).ready(function() {
+        var geoRef = new Firebase('https://wsk.firebaseio.com/geodata'),
+          geo = new geoFire(geoRef);
         mapInit(); // google maps api default code
       });
     </script>

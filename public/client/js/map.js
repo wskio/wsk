@@ -33,10 +33,10 @@ var mapInit = function(){
         title: 'Click to zoom'
       });
       var radiusOptions = {
-        strokeColor: '#419DD5',
+        strokeColor: 'rgb(35, 178, 192)',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: 'rgba(175, 227, 243, 0.71)',
+        fillColor: 'rgba(104, 181, 188, 0.39)',
         fillOpacity: 0.35,
         map: map,
         center: initialLocation,

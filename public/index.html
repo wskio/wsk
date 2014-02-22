@@ -16,11 +16,17 @@
   <body>
     <div id="map-canvas"></div>
     <div id="chat-container">
-      <div id="chat-log"></div>
+      <div id="chat-log">
+      </div>
       <div id="chat-input" contenteditable="true" tabindex="1"></div>
     </div>
     <script>
       //ha
+      var displayMessage = function(msg){
+        $('#chat-log').append();
+        $('<div class="messageContainer">').append;
+      };
+
       $(document).ready(function() {
 
         var geoRef = new Firebase('https://wsk.firebaseio.com/geodata');

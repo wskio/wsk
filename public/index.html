@@ -43,7 +43,7 @@
           if (e.keyCode === 13){
             e.preventDefault();
             geo.insertByLoc([myPosition.lat,myPosition.lon], $(this).text(), console.log('post was sent!'));
-            console.log($(this).text());
+            displayMessage($(this).text());
             $(this).text('');
           }
         });

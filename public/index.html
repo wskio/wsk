@@ -20,7 +20,7 @@
       <div id="chat-container">
         <div id="chat-log">
         </div>
-        <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">wskr</div>
+        <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">>  <</div>
       </div>
     </div>
     <script>
@@ -37,14 +37,17 @@
 
       $(document).ready(function() {
 
-        $('#app-container').css('height',$(document).height());
-        $('#chat-input').on('focus mouseenter', function(){
+        $('#app-container').css('height',$(window).height());
+        $('#chat-input').on('focus', function(){
           $(this).text('');
           $(this).css({'color':'black'});
         });
-        $('#chat-input').on('focusout mouseleave', function(){
-          $(this).text('wskr');
+        $('#chat-input').on('focusout', function(){
+          $(this).text('►');
           $(this).css({'color':'grey'});
+          if ($(this).is(':focus')){
+            $(this).blur();
+          }
         });
 
 

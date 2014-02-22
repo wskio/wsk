@@ -6,6 +6,11 @@ var mapInit = function(){
   var browserSupportFlag =  new Boolean();
   var radiusCircle;
   var myOptions = {
+    draggable: false,
+    panControl: false,
+    disableDoubleClickZoom: true,
+    scrollwheel: false,
+    disableDefaultUI: true,
     zoom: 17,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };

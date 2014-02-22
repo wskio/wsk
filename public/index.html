@@ -22,13 +22,17 @@
     <script>
       //ha
       $(document).ready(function() {
+
         var geoRef = new Firebase('https://wsk.firebaseio.com/geodata');
         var geo = new geoFire(geoRef);
         mapInit(); // google maps api default code
+
+        setInterval(getLocation, 7000);
+
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){
             e.preventDefault();
-            geo.insertByLoc([88,88], $(this).text(), console.log('post was sent!'));
+            geo.insertByLoc([myPosition.lat,myPosition.lon], $(this).text(), console.log('post was sent!'));
             console.log($(this).text());
             $(this).text('');
           }

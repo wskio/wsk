@@ -4,7 +4,7 @@ var mapInit = function(){
   var siberia = new google.maps.LatLng(60, 105);
   var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
   var browserSupportFlag =  new Boolean();
-
+  var radiusCircle;
   var myOptions = {
     zoom: 18,
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -24,8 +24,19 @@ var mapInit = function(){
         position: initialLocation,
         title: 'Click to zoom'
       });
-
+      var radiusOptions = {
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: map,
+        center: initialLocation,
+        radius: 50,
+      };
+      radiusCircle = new google.maps.Circle(radiusOptions);
       marker.setMap(map);
+
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });
@@ -88,15 +99,18 @@ function setMarkers(map, locations) {
       type: 'poly'
   };
   for (var i = 0; i < locations.length; i++) {
+    console.log('running through location: ' + locations[i])
     var blip = locations[i];
-    var myLatLng = new google.maps.LatLng(blip[1], blip[2]);
+    var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
     var marker = new google.maps.Marker({
         position: myLatLng,
+        animation: google.maps.Animation.DROP,
         map: map,
         icon: image,
         shape: shape,
-        title: beach[0],
-        zIndex: beach[3]
+        title: 'place',
+        zIndex: 0
     });
   }
 }
+

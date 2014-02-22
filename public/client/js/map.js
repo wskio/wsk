@@ -13,9 +13,40 @@ var mapInit = function(){
     scrollwheel: false,
     disableDefaultUI: true,
     zoom: 19,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+     mapTypeControlOptions: {
+       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+     }
+    //mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+
+  var styledMap = new google.maps.StyledMapType(styles,
+    {name: "Styled Map"});
+
+  var styles = [
+    {
+      stylers: [
+        { hue: "#00ffe6" },
+        { saturation: -1 }
+      ]
+    },{
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 100 },
+        { visibility: "simplified" }
+      ]
+    },{
+      featureType: "road",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }
+  ];
+
   map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+  map.mapTypes.set('map_style', styledMap);
+  map.setMapTypeId('map_style');
 
   // Try W3C Geolocation (Preferred)
   if(navigator.geolocation) {

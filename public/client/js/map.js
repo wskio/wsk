@@ -78,7 +78,7 @@ var mapInit = function(){
   google.maps.event.addDomListener(window, 'load', "initialize");
   // marker.setMap(map);
 }
-
+var allMarkers = [];
 function setMarkers(map, locations) {
   // Add markers to the map
 
@@ -107,9 +107,11 @@ function setMarkers(map, locations) {
       coord: [1, 1, 1, 20, 18, 20, 18 , 1],
       type: 'poly'
   };
-  for (var i = 0; i < locations.length; i++) {
-    console.log('running through location: ' + locations[i])
-    var blip = locations[i];
+  // for (var i = 0; i < locations.length; i++) {
+    console.log('running through location: ' + locations)
+    // var blip = locations[i];
+    var blip = locations;
+    console.log(blip);
       var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
       var marker = new google.maps.Marker({
           position: myLatLng,
@@ -120,23 +122,50 @@ function setMarkers(map, locations) {
           title: 'place',
           zIndex: 0
       });
-  }
+      allMarkers.push(marker);
+  // }
 }
-var postsNumber = undefined;
-var firstRun = false;
+var postsNumber = 0;
+var firstRunComplete = false;
 
+var messagePositions = [];
 var getAllPosts = function(){
   geo.onPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(arr){
-    postsNumber = postsNumber || arr.length;
 
     console.log(arr.length);
-    var messagePositions = [];
-    $('.message').remove();
-    for (var i = arr.length - postsNumber; i < arr.length; i++) {
-      displayMessage(arr[i].text);
-      messagePositions.push(arr[i].position);
-    };
-    postsNumber++;
-    setMarkers(map, messagePositions);
+    // $('.messageContainer').remove();
+    if(firstRunComplete===false){
+      if(arr.length>=7){
+        for(var i = arr.length-7; i<arr.length; i++) {
+          setMarkers(map, arr[i].position);
+          displayMessage(arr[i].text);
+          messagePositions.push(arr[i].position);
+        }
+        firstRunComplete = true;
+      } else {
+        for(var i = 0; i<arr.length; i++) {
+          setMarkers(map, arr[i].position);
+          displayMessage(arr[i].text);
+          messagePositions.push(arr[i].position);
+        }
+        firstRunComplete = true;
+      }
+
+    } else {
+      if(messagePositions.length>7){
+
+        allMarkers[arr.length-allMarkers.length].setMap(null);
+        setMarkers(map, arr[arr.length-1].position);
+        displayMessage(arr[arr.length-1].text);
+        messagePositions.push(arr[arr.length-1].position);
+
+      } else {
+
+        setMarkers(map, arr[arr.length-1].position);
+        displayMessage(arr[arr.length-1].text);
+        messagePositions.push(arr[arr.length-1].position);
+
+      }
+    }
   });
 }

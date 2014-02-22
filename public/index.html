@@ -16,7 +16,7 @@
     <div id="map-canvas"></div>
     <div id="chat-container">
       <div id="chat-log"></div>
-      <div id="chat-input" contenteditable="true"></div>
+      <div id="chat-input" contenteditable="true" tabindex="1"></div>
     </div>
     <script>
       //ha
@@ -24,6 +24,13 @@
         var geoRef = new Firebase('https://wsk.firebaseio.com/geodata'),
           geo = new geoFire(geoRef);
         mapInit(); // google maps api default code
+        $('#chat-input').on('keypress',function(e){
+          if (e.keyCode === 13){
+            e.preventDefault();
+            console.log($(this).text());
+            $(this).text('');
+          }
+        });
       });
     </script>
   </body>

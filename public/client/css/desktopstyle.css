@@ -29,6 +29,7 @@ body {
   float:bottom;
   background-color: lightgrey;
   border-top:1px solid black;
+  overflow:auto;
 }
 #chat-log {
   height:90%;
@@ -36,4 +37,5 @@ body {
   float:top;
   background-color:white;
   text-align:auto;
+  overflow:auto;
 }

@@ -3,41 +3,72 @@ html {
 }
 body {
   width: 100%;
-  margin: 0px;
-  padding: 0px;
+  margin: 0px;/*
+  padding: 0px;*/
 }
 #app-container{
   width:100%;
+  overflow:auto;
 }
 #map-canvas {
   height: 60%;
   width:100%;
   position:relative;
+  float:bottom;
   display:block;
   left:0px;
   top:0px;
-  float:bottom;
+}
+#banner {
+  position:absolute;
+  bottom:0px;
+  color: rgb(103, 199, 236);
+  height:20px;
 }
 #chat-container {
   height:40%;
   width:100%;
-  position:relative;
+  position:absolute;
   bottom:0px;
   float:bottom;
   background-color:grey;
   border-top: 8px rgb(103, 199, 236);
 }
-#chat-input {
-  height:25%;
+#input-container{
+  height:18%;
   position:relative;
   float:bottom;
-  background-color: lightgrey;
+  border-top:1px solid lightgrey;
+  background-color: rgb(88, 200, 211);
+}
+#chat-input {
+  vertical-align: center;
+  height:75%;
+  position:relative;
+  top:12.5%;
+  width: 75%;
+  margin-left:2%;
+  margin-right:2%;
+  text-align:center;
+  background-color: white;
+  border-radius: 10px;
   overflow:auto;
+  display: inline-block;
+}
+#send-button{
+  text-align:center;
+  height:75%;
+  position:relative;
+  float:right;
+  margin-right:2%;
+  top:12.5%;
+  background-color: lightgreen;
+  width: 10%;
 }
 #chat-log {
-  padding-top: 4px;
-  padding-bottom: 0px;
-  height:75%;
+  border-top: 1px solid lightgrey;
+  padding-bottom: 4px;
+  height:82%;
   position:relative;
   background-color: rgb(88, 200, 211);
   text-align:auto;
@@ -65,9 +96,9 @@ body {
   line-height:20px;
   background-color: rgb(255, 252, 252);
   padding: 8px;
-  margin-bottom: 3px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 3px;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 .message:hover{
   background-color: rgb(214, 238, 203);

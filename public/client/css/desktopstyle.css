@@ -1,0 +1,37 @@
+html {
+  height: 100% 
+}
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0px; 
+  padding: 0px;
+}
+#map-canvas {
+  height: 100%;
+  width:70%;
+  position:relative;
+  display:block;
+  float:left;
+}
+#chat-container {
+  height:100%;
+  width:30%;
+  position:relative;
+  float:right;
+  background-color:black;
+}
+#chat-input {
+  height:10%;
+  position:relative;
+  float:bottom;
+  background-color: lightgrey;
+  border-top:1% solid black;
+}
+#chat-log {
+  height:90%;
+  position:relative;
+  float:top;
+  background-color:white;
+  text-align:auto;
+}

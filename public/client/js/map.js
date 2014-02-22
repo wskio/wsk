@@ -137,8 +137,8 @@ var getAllPosts = function(){
     console.log(arr);
     // $('.messageContainer').remove();
     if(firstRunComplete===false){
-      if(arr.length>=7){
-        for(var i = arr.length-7; i<arr.length; i++) {
+      if(arr.length>=5){
+        for(var i = arr.length-5; i<arr.length; i++) {
           setMarkers(map, arr[i].position);
           displayMessage(arr[i].text, arr[i].color);
           messagePositions.push(arr[i].position);
@@ -154,7 +154,7 @@ var getAllPosts = function(){
       }
       // postsNumber = arr.length;
     } else {
-      if(messagePositions.length>7){
+      if(messagePositions.length>5){
 
         allMarkers[removeTracker].setMap(null);
         setMarkers(map, arr[arr.length-1].position);

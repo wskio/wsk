@@ -20,7 +20,10 @@
       <div id="chat-container">
         <div id="chat-log">
         </div>
-        <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">>'.'<</div>
+        <div id="input-container">
+          <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">>'.'<</div>
+          <div id="send-button">Send</div>
+        </div>
       </div>
     </div>
     <script>
@@ -37,7 +40,7 @@
       };
 
       $(document).ready(function() {
-
+        window.scrollTo(0,1); // on mobile this gets rid of the address bar
         $('#app-container').css('height',$(window).height());
         $('#chat-input').on('focus', function(){
           $(this).text('');

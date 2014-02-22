@@ -32,7 +32,9 @@
       var myColor = Math.floor(Math.random()*16777215).toString(16);
       var displayMessage = function(msg, color){
         console.log(color);
-        var message = $('#chat-log').append($('<div class="messageContainer" style="color:#'+color+'">').append($('<div class="message">').text(msg)));
+        var message = $('#chat-log').append($('<div class="messageContainer" style="opacity:0;color:#'+color+'">').append($('<div class="message">').text(msg)));
+        $('.messageContainer').animate({'opacity':1});
+        $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
       };
 
       $(document).ready(function() {

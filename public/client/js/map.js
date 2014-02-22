@@ -6,7 +6,7 @@ var mapInit = function(){
   var browserSupportFlag =  new Boolean();
   var radiusCircle;
   var myOptions = {
-    zoom: 18,
+    zoom: 17,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
@@ -25,14 +25,14 @@ var mapInit = function(){
         title: 'Click to zoom'
       });
       var radiusOptions = {
-        strokeColor: '#FF0000',
+        strokeColor: 'rgba(7, 155, 34, 0.82)',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#FF0000',
+        fillColor: 'rgba(137, 218, 152, 0.82)',
         fillOpacity: 0.35,
         map: map,
         center: initialLocation,
-        radius: 50,
+        radius: 200,
       };
       radiusCircle = new google.maps.Circle(radiusOptions);
       marker.setMap(map);

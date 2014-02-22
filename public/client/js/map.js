@@ -6,7 +6,7 @@ var mapInit = function(){
   var browserSupportFlag =  new Boolean();
 
   var myOptions = {
-    zoom: 12,
+    zoom: 18,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
@@ -17,6 +17,15 @@ var mapInit = function(){
     navigator.geolocation.getCurrentPosition(function(position) {
       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       map.setCenter(initialLocation);
+      var imageBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(initialLocation),
+      new google.maps.LatLng(initialLocation));
+      var marker = new google.maps.Marker({
+        position: initialLocation,
+        title: 'Click to zoom'
+      });
+
+      marker.setMap(map);
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });
@@ -46,10 +55,6 @@ var mapInit = function(){
   // var map = new google.maps.Map(document.getElementById("map-canvas"),
   //     mapOptions);
   // adds marker at position defined below
-  var marker = new google.maps.Marker({
-    position: map.getCenter(),
-    map: map,
-    title: 'Click to zoom'
-  });
   google.maps.event.addDomListener(window, 'load', "initialize");
+  // marker.setMap(map);
 }

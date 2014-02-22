@@ -20,7 +20,7 @@
       <div id="chat-container">
         <div id="chat-log">
         </div>
-        <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">>  <</div>
+        <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">>'.'<</div>
       </div>
     </div>
     <script>
@@ -33,6 +33,7 @@
       var displayMessage = function(msg, color){
         console.log(color);
         var message = $('#chat-log').append($('<div class="messageContainer" style="color:#'+color+'">').append($('<div class="message">').text(msg)));
+        $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
       };
 
       $(document).ready(function() {
@@ -43,7 +44,7 @@
           $(this).css({'color':'black'});
         });
         $('#chat-input').on('focusout', function(){
-          $(this).text('►');
+          $(this).text(">'.'<");
           $(this).css({'color':'grey'});
           if ($(this).is(':focus')){
             $(this).blur();

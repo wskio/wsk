@@ -1,5 +1,3 @@
-//var x = document.getElementById("demo");
-
 var myPosition = {lat: null, lon: null};
 
 var options = {'enableHighAccuracy': true, 'timeout':10000, 'maximumAge':0};

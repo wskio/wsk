@@ -42,9 +42,9 @@
         mapInit(); // google maps api default code
 
         getLocation();
-        // setInterval(getLocation, 7000);
+
         var getAllPosts = function(){
-          geo.getPointsNearLoc([myPosition.lat, myPosition.lon], 1, function(arr){
+          geo.onPointsNearLoc([myPosition.lat, myPosition.lon], 1, function(arr){
             var messagePositions = [];
             for (var i = 0; i < arr.length; i++) {
               displayMessage(arr[i].text);
@@ -52,8 +52,8 @@
             };
             setMarkers(map, messagePositions);
           });
-        }
-        setTimeout(getAllPosts, 6000);
+        };
+        setTimeout(getAllPosts,2000);
 
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){

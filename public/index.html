@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="client/css/mobilestyle.css" media="(max-width:800px)" rel="stylesheet" type="text/css">
     <link href="client/css/desktopstyle.css" media="(min-width:800px)" rel="stylesheet" type="text/css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -44,15 +45,12 @@
         // setInterval(getLocation, 7000);
         var getAllPosts = function(){
           geo.getPointsNearLoc([myPosition.lat, myPosition.lon], 1, function(arr){
+            var messagePositions = [];
             for (var i = 0; i < arr.length; i++) {
               displayMessage(arr[i].text);
-              var messagePosition = new google.maps.LatLng(arr[i].position[0],arr[i].position[1]);
-              var marker = new google.maps.Marker({
-                position: messagePosition,
-                title: 'Click to zoom'
-              });
-              marker.setMap(map);
+              messagePositions.push(arr[i].position);
             };
+            setMarkers(map, messagePositions);
           });
         }
         setTimeout(getAllPosts, 6000);

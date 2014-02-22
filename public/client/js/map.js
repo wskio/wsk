@@ -88,15 +88,17 @@ function setMarkers(map, locations) {
       type: 'poly'
   };
   for (var i = 0; i < locations.length; i++) {
+    console.log('running through location: ' + locations[i])
     var blip = locations[i];
-    var myLatLng = new google.maps.LatLng(blip[1], blip[2]);
+    var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
     var marker = new google.maps.Marker({
         position: myLatLng,
+        animation: google.maps.Animation.DROP,
         map: map,
         icon: image,
         shape: shape,
-        title: beach[0],
-        zIndex: beach[3]
+        title: 'place',
+        zIndex: 0
     });
   }
 }

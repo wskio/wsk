@@ -24,11 +24,13 @@
       </div>
     </div>
     <script>
+      var geoRef = new Firebase('https://wsk.firebaseio.com/geodata');
+      geo = new geoFire(geoRef);
       var displayMessage = function(msg){
         var $container = $('<div class="messageContainer">');
-        var $icon = $('<div class="icon">');
+        //var $icon = $('<div class="icon">');
         var $msg = $('<div class="message">').text(msg);
-        $container.append($icon);
+        //$container.append($icon);
         $container.append($msg);
         $('#chat-log').append($container);
       };
@@ -37,29 +39,13 @@
 
         $('#app-container').css('height',$(document).height());
 
-        var geoRef = new Firebase('https://wsk.firebaseio.com/geodata');
-        var geo = new geoFire(geoRef);
-        mapInit(); // google maps api default code
-
-        getLocation();
-        // setInterval(getLocation, 7000);
-        var getAllPosts = function(){
-          geo.getPointsNearLoc([myPosition.lat, myPosition.lon], .2, function(arr){
-            var messagePositions = [];
-            for (var i = 0; i < arr.length; i++) {
-              displayMessage(arr[i].text);
-              messagePositions.push(arr[i].position);
-            };
-            setMarkers(map, messagePositions);
-          });
-        }
-        setTimeout(getAllPosts, 6000);
+        mapInit(); // google maps api default
 
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){
             e.preventDefault();
             geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon]}, console.log('post was sent!'));
-            displayMessage($(this).text());
+            //displayMessage($(this).text());
             $(this).text('');
           }
         });

@@ -6,6 +6,11 @@ var mapInit = function(){
   var browserSupportFlag =  new Boolean();
   var radiusCircle;
   var myOptions = {
+    draggable: false,
+    panControl: false,
+    disableDoubleClickZoom: true,
+    scrollwheel: false,
+    disableDefaultUI: true,
     zoom: 17,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
@@ -15,7 +20,9 @@ var mapInit = function(){
   if(navigator.geolocation) {
     browserSupportFlag = true;
     navigator.geolocation.getCurrentPosition(function(position) {
-      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      myPosition.lat = position.coords.latitude;
+      myPosition.lon = position.coords.longitude;
+      initialLocation = new google.maps.LatLng(myPosition.lat,myPosition.lon);
       map.setCenter(initialLocation);
       var imageBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(initialLocation),
@@ -36,6 +43,7 @@ var mapInit = function(){
       };
       radiusCircle = new google.maps.Circle(radiusOptions);
       marker.setMap(map);
+      getAllPosts();
 
     }, function() {
       handleNoGeolocation(browserSupportFlag);
@@ -101,16 +109,30 @@ function setMarkers(map, locations) {
   for (var i = 0; i < locations.length; i++) {
     console.log('running through location: ' + locations[i])
     var blip = locations[i];
-    var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
-    var marker = new google.maps.Marker({
-        position: myLatLng,
-        animation: google.maps.Animation.DROP,
-        map: map,
-        icon: image,
-        shape: shape,
-        title: 'place',
-        zIndex: 0
-    });
+    setTimeout(function(){
+      var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
+      var marker = new google.maps.Marker({
+          position: myLatLng,
+          animation: google.maps.Animation.DROP,
+          map: map,
+          icon: image,
+          shape: shape,
+          title: 'place',
+          zIndex: 0
+      });
+    }, 100 * i);
   }
 }
 
+var getAllPosts = function(){
+  geo.onPointsNearLoc([myPosition.lat, myPosition.lon], .2, function(arr){
+    console.log(arr);
+    var messagePositions = [];
+    $('.message').remove();
+    for (var i = 0; i < arr.length; i++) {
+      displayMessage(arr[i].text);
+      messagePositions.push(arr[i].position);
+    };
+    setMarkers(map, messagePositions);
+  });
+}

@@ -14,14 +14,15 @@
     <script src="client/js/geofire.js"></script>
   </head>
   <body>
-    <div id="map-canvas"></div>
-    <div id="chat-container">
-      <div id="chat-log">
+    <div id="app-container">
+      <div id="map-canvas"></div>
+      <div id="chat-container">
+        <div id="chat-log">
+        </div>
+        <div id="chat-input" contenteditable="true" tabindex="1"></div>
       </div>
-      <div id="chat-input" contenteditable="true" tabindex="1"></div>
     </div>
     <script>
-      //ha
       var displayMessage = function(msg){
         var $container = $('<div class="messageContainer">');
         var $icon = $('<div class="icon">');
@@ -32,6 +33,8 @@
       };
 
       $(document).ready(function() {
+
+        $('#app-container').css('height',$(document).height());
 
         var geoRef = new Firebase('https://wsk.firebaseio.com/geodata');
         var geo = new geoFire(geoRef);

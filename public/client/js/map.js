@@ -126,6 +126,7 @@ function setMarkers(map, locations) {
   // }
 }
 var postsNumber = 0;
+var removeTracker = 0;
 var firstRunComplete = false;
 
 var messagePositions = [];
@@ -151,14 +152,15 @@ var getAllPosts = function(){
         }
         firstRunComplete = true;
       }
-
+      // postsNumber = arr.length;
     } else {
       if(messagePositions.length>7){
 
-        //allMarkers[arr.length-allMarkers.length].setMap(null);
+        allMarkers[removeTracker].setMap(null);
         setMarkers(map, arr[arr.length-1].position);
         displayMessage(arr[arr.length-1].text, arr[arr.length-1].color);
         messagePositions.push(arr[arr.length-1].position);
+        removeTracker++;
 
       } else {
 

@@ -29,6 +29,7 @@ body {
   background-color:black;
 }
 #chat-input {
+  text-align:center;
   height:10%;
   position:relative;
   float:bottom;
@@ -42,13 +43,15 @@ body {
   float:top;
   background-color:white;
   text-align:auto;
+  padding-top:4px;
+  background-color: rgb(88, 200, 211);
   overflow:auto;
 }
 .messageContainer{
   width:100%;
   float:top;
   padding-bottom:1px;
-  background-color:black;
+  background-color: rgb(103, 199, 236);
 }
 .icon{
   width:20px;
@@ -62,6 +65,16 @@ body {
 .message{
   text-align:center;
   line-height:20px;
-  width:100%;
-  background-color: white;
+  border-radius: 10px;
+  padding:8px;
+  margin-bottom: 3px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: rgb(255, 252, 252);
+}
+.message:hover{
+  background-color: rgb(214, 238, 203);
+}
+.message:click{
+  background-color: rgb(214, 238, 203);
 }

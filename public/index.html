@@ -20,24 +20,28 @@
       <div id="chat-container">
         <div id="chat-log">
         </div>
-        <div id="chat-input" contenteditable="true" tabindex="1"></div>
+        <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">wskr</div>
       </div>
     </div>
     <script>
       var geoRef = new Firebase('https://wsk.firebaseio.com/geodata');
       geo = new geoFire(geoRef);
       var displayMessage = function(msg){
-        var $container = $('<div class="messageContainer">');
-        //var $icon = $('<div class="icon">');
-        var $msg = $('<div class="message">').text(msg);
-        //$container.append($icon);
-        $container.append($msg);
-        $('#chat-log').append($container);
+        $('#chat-log').append($('<div class="messageContainer">').append($('<div class="message">').text(msg)));
       };
 
       $(document).ready(function() {
 
         $('#app-container').css('height',$(document).height());
+        $('#chat-input').on('focus mouseenter', function(){
+          $(this).text('');
+          $(this).css({'color':'black'});
+        });
+        $('#chat-input').on('focusout mouseleave', function(){
+          $(this).text('wskr');
+          $(this).css({'color':'grey'});
+        });
+
 
         mapInit(); // google maps api default
 
@@ -45,7 +49,6 @@
           if (e.keyCode === 13){
             e.preventDefault();
             geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon]}, console.log('post was sent!'));
-            //displayMessage($(this).text());
             $(this).text('');
           }
         });

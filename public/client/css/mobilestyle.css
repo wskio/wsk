@@ -19,7 +19,6 @@ body {
   float:bottom;
 }
 #chat-container {
-
   height:40%;
   width:100%;
   position:relative;
@@ -36,7 +35,7 @@ body {
   overflow:auto;
 }
 #chat-log {
-  padding-top: 8px;
+  padding-top: 4px;
   padding-bottom: 0px;
   height:75%;
   position:relative;
@@ -70,4 +69,10 @@ body {
   margin-bottom: 3px;
   margin-left: 10px;
   margin-right: 10px;
+}
+.message:hover{
+  background-color: rgb(214, 238, 203);
+}
+.message:click{
+  background-color: rgb(214, 238, 203);
 }

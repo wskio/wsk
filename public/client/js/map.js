@@ -131,7 +131,7 @@ var getAllPosts = function(){
 
     console.log(arr.length);
     var messagePositions = [];
-    $('.message').remove();
+    $('.messageContainer').remove();
     for (var i = arr.length - postsNumber; i < arr.length; i++) {
       displayMessage(arr[i].text);
       messagePositions.push(arr[i].position);

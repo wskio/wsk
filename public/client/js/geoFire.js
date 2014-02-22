@@ -5,11 +5,11 @@
 // (http://en.wikipedia.org/wiki/Geohash) in Firebase.
 
 
-(function () {  
+(function () {
     var BITS = [16, 8, 4, 2, 1];
-    
+
     var BASE32 = "0123456789bcdefghjkmnpqrstuvwxyz";
-    
+
     var NEIGHBORS = {
         "north": {
             "even" : "p0r21436x8zb9dcf5h7kjnmqesgutwvy",
@@ -28,7 +28,7 @@
             "odd"  : "14365h7k9dcfesgujnmqp0r2twvyx8zb"
         }
     };
-    
+
     var BORDERS = {
         "north" : { "even" : "prxz",     "odd"  : "bcfguvyz" },
         "east"  : { "even" : "bcfguvyz", "odd"  : "prxz"     },
@@ -40,7 +40,7 @@
 
     var onSearches = {},
         onCallbacks = {};
-    
+
     /**
      * Generate a geohash of the specified precision/string length
      * from the [latitude, longitude] pair, specified as an array.
@@ -55,19 +55,19 @@
             latRange = { "min":  -90, "max":  90 },
             lonRange = { "min": -180, "max": 180 },
             val, range, mid;
-                    
+
         precision = Math.min(precision || 12, 22);
-        
+
         if (lat < latRange["min"] || lat > latRange["max"])
             throw "Invalid latitude specified! (" + lat + ")";
-        
+
         if (lon < lonRange["min"] || lon > lonRange["max"])
             throw "Invalid longitude specified! (" + lon + ")";
-        
+
         while (hash.length < precision) {
             val = (even) ? lon : lat;
             range = (even) ? lonRange : latRange;
-            
+
             mid = (range["min"] + range["max"]) / 2;
             if (val > mid) {
                     hashVal = (hashVal << 1) + 1;
@@ -76,7 +76,7 @@
                 hashVal = (hashVal << 1) + 0;
                     range["max"] = mid;
             }
-            
+
             even = !even;
             if (bits < 4) {
                 bits++;
@@ -86,10 +86,10 @@
                     hashVal = 0;
             }
         }
-        
+
         return hash;
     }
-    
+
     function halve_interval(interval, decimal, mask) {
         var mid = (interval["min"] + interval["max"]) / 2;
         if (decimal & mask)
@@ -98,10 +98,10 @@
             interval["max"] = mid;
     }
 
-    /**                                                                                                              
+    /**
      * Decode the geohash to get the location of the center of the bounding box it represents;
      * the [latitude, longitude] coordinates of the center are returned as an array.
-     */ 
+     */
     function decode(hash) {
         var latRange = { "min": -90, "max": 90 },
             lonRange = { "min": -180, "max": 180 },
@@ -110,7 +110,7 @@
 
         for (var i = 0; i < hash.length; i++) {
             decimal = BASE32.indexOf(hash[i]);
-            
+
             for (var j = 0; j < 5; j++) {
                 interval = (even) ? lonRange : latRange;
                 mask = BITS[j];
@@ -118,10 +118,10 @@
                 even = !even;
             }
         }
-        
+
         lat = (latRange["min"] + latRange["max"]) / 2;
         lon = (lonRange["min"] + lonRange["max"]) / 2;
-        
+
         return [lat, lon];
     }
 
@@ -132,11 +132,11 @@
     function rad2deg(rad) {
         return rad * 180 / Math.PI;
     }
-    
+
     function rad2km(rad) {
         return 6371 * rad;
     }
-    
+
     function deg2km(deg) {
         return rad2km(deg2rad(deg));
     }
@@ -163,7 +163,7 @@
         a = Math.sin(dlat / 2) * Math.sin(dlat / 2) +
             Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
             Math.sin(dlon / 2) * Math.sin(dlon / 2);
-        
+
         c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return radius * c;
     }
@@ -186,13 +186,13 @@
         var length = hash.length,
             parity = (length % 2) ? 1 : 0,
             a = 5 * length - parity;
-        
+
         return {
             "height" : deg2km(180 / Math.pow(2, a / 2)),
             "width"  : deg2km(180 / Math.pow(2, (a - 1) / 2))
                 };
     }
-  
+
 
     /**
      * Return the geohash of the neighboring bounding box in the
@@ -200,12 +200,12 @@
      */
     function neighbor(hash, dir) {
         hash = hash.toLowerCase();
-        
+
         var lastChar = hash.charAt(hash.length - 1),
             type = (hash.length % 2) ? "odd" : "even",
             base = hash.substring(0, hash.length-1);
-        
-        if (BORDERS[dir][type].indexOf(lastChar) != -1) {        
+
+        if (BORDERS[dir][type].indexOf(lastChar) != -1) {
             if (base.length <= 0)
                 return "";
             base = neighbor(base, dir);
@@ -229,7 +229,7 @@
         neighbors.push(neighbor(neighbors[1], "west"));
         return neighbors;
     }
-  
+
     function values(obj) {
         var values = [];
         for (var key in obj) {
@@ -239,7 +239,7 @@
         }
         return values;
     }
-    
+
     function setHash(data, geohash) {
         var primitive = JSON.stringify(data),
             copy = JSON.parse(primitive);
@@ -257,7 +257,7 @@
         this._firebase = firebaseRef.child('geoFire').child('dataByHash');
         this._agents = firebaseRef.child('geoFire').child('dataById');
     }
-    
+
     geoFire.prototype.encode = geoFire.encode = encode;
     geoFire.prototype.decode = geoFire.decode = decode;
     geoFire.prototype.dimensions = geoFire.dimensions = dimensions;
@@ -281,12 +281,12 @@
                 cb(error);
             });
     };
-    
+
     /**
      * Store data by location, specified by a [latitude, longitude] array, and
      * a user-provided Id. When the insert has completed, the option callback
-     * function (if provided) is called with null on success/ Error on failure. 
-     * Data inserted using this function can be queried by location or by id. 
+     * function (if provided) is called with null on success/ Error on failure.
+     * Data inserted using this function can be queried by location or by id.
      */
     geoFire.prototype.insertByLocWithId = function insertByLocWithId(latLon, id, data, cb) {
         var self = this,
@@ -305,7 +305,7 @@
                 }
             });
     };
-    
+
     /**
      * Remove the data point with the specified Id; the data point must have
      * been inserted using insertByLocWithId. On completion, the optional callback
@@ -315,12 +315,12 @@
         var self = this,
             cb = cb || noop;
 
-        this._agents.child(id).once('value', 
+        this._agents.child(id).once('value',
                                     function (snapshot) {
                                         var data = snapshot.val();
                                         self._firebase.child(data.geohash).child(id).remove(function(error) {
                                                 if (!error)
-                                                    self._agents.child(id).remove(cb);                                                    
+                                                    self._agents.child(id).remove(cb);
                                                 else
                                                     cb(error);
                                             });
@@ -342,7 +342,7 @@
                                         cb(arg);
                                     });
     };
-    
+
     /**
      * Update the location of the data point with the specified Id; the data
      * point must have been inserted using insertByLocWithId. The optional callback
@@ -351,10 +351,10 @@
     geoFire.prototype.updateLocForId = function updateLocForId(latLon, id, cb) {
         var self = this,
             cb = cb || noop;
-    
+
         this._agents.child(id).once('value',
                                     function (snapshot) {
-                                        var data = snapshot.val();         
+                                        var data = snapshot.val();
                                         if (data === null) {
                                             cb(new Error("geoFire.updateLocForId error: Invalid Id argument."));
                                         } else {
@@ -362,7 +362,7 @@
                                             self._firebase.child(geohash).child(id).remove(function(error) {
                                                     if (!error) {
                                                         self.insertByLocWithId(latLon, id, data, cb);
-                                                    } else 
+                                                    } else
                                                         cb(error);
                                                 });
                                         }
@@ -380,7 +380,7 @@
     geoFire.prototype.getPointsNearLoc = function getPointsNearLoc(latLon,
                                                                    radius,
                                                                    cb) {
-        
+
         var hash = encode(latLon);
         this.searchRadius(hash, radius, 0, cb);
     };
@@ -419,12 +419,12 @@
                                     });
     }
 
-    /**                                                                                             
-     * Find all data points within the specified radius, in kilometers,                           
+    /**
+     * Find all data points within the specified radius, in kilometers,
      * from the point with the specified Id; the point must have been inserted using insertByLocWithId.
-     * The matching points are passed to the callback function as an array in distance sorted order. 
+     * The matching points are passed to the callback function as an array in distance sorted order.
      * The callback function is called with the initial set of search results and
-     * each time the set of search results changes. 
+     * each time the set of search results changes.
      */
     geoFire.prototype.onPointsNearId = function onPointsNearId(id, radius, cb) {
         var self = this;
@@ -437,7 +437,7 @@
                                             self.searchRadius(data.geohash, radius, 1, cb);
                                     });
     }
-    
+
     /**
      * Find all data points within the specified radius, in kilometers,
      * from the point with the specified geohash.
@@ -465,13 +465,13 @@
         var zoomLevel = 6;
         while (radius > boundingBoxShortestEdgeByHashLength[zoomLevel])
             zoomLevel -= 1;
-        
+
         hash = hash.substring(0, zoomLevel);
-        
+
         // TODO: Be smarter about this, and only zoom out if actually optimal.
         queries = this.neighbors(hash);
         queries.push(hash);
-        
+
         // Get unique list of neighbor hashes.
         var uniquesObj = {};
         for (var ix = 0; ix < queries.length; ix++) {
@@ -482,7 +482,7 @@
         }
         queries = values(uniquesObj);
         delete uniquesObj;
-        
+
         var resultHandler = function(snapshot) {
             var prefix = this.prefix;
             matchesByPrefix[prefix] = [];
@@ -505,7 +505,7 @@
                             matchHash = match[0],
                             matchElt = match[1],
                             pointDist = distByHash(srcHash, matchHash);
-                        
+
                         if (pointDist <= radius) {
                             distDict[matchElt] = pointDist;
                             matchesFiltered.push(matchElt);
@@ -513,7 +513,7 @@
                     }
                 }
 
-                // Sort the results by radius.                                          
+                // Sort the results by radius.
                 matchesFiltered.sort(function(a, b) {
                     return distDict[a] - distDict[b];
                 });
@@ -529,10 +529,10 @@
             endPrefix = startPrefix + "~";
 
             prefixList.push(startPrefix);
-            
+
             if (setAlert) {
                 prefixList.push(startPrefix);
-                
+
                 this._firebase
                     .startAt(null, startPrefix)
                     .endAt(null, endPrefix)
@@ -544,7 +544,7 @@
                     .once('value', resultHandler, { prefix: startPrefix });
             }
         }
-        
+
         if (setAlert) {
             if ([srcHash, radius] in onSearches) {
                 onSearches[[srcHash, radius]].count += 1;
@@ -556,7 +556,7 @@
             }
         }
     };
-    
+
     /**
      * Cancels a search that was initiated by onPointsNearLoc with the source
      * point, radius and callback specified. If no callback is specified, all
@@ -569,10 +569,10 @@
         var hash = encode(latLon);
         this.cancelSearch(hash, radius, cb);
     }
-    
+
     /**
      * Cancels a search that was initiated by onPointsNearId with the source
-     * point, radius and callback specified. If no callback is specified, all                                            
+     * point, radius and callback specified. If no callback is specified, all
      * outstanding searches for the source point-radius pair are cancelled
      * An offPointsNearId call cancels one onPointsNearId call.
      * The function does not return anything.
@@ -588,12 +588,12 @@
                                             self.cancelSearch(data.geohash, radius, cb);
                                     });
     }
-    
+
     /**
      * Cancels a search that was initiated by onPointsNearLoc/ onPointsNearId
      * with the source point, radius and callback specified. If no callback is specified,
-     * all aoutstanding searches for the source point-radius pair are cancelled. 
-     * A call cancels one corresponding call. The function does not return anything.                                                                       
+     * all aoutstanding searches for the source point-radius pair are cancelled.
+     * A call cancels one corresponding call. The function does not return anything.
      */
     geoFire.prototype.cancelSearch = function cancelSearch(srcHash, radius, cb) {
         var self = this;
@@ -601,7 +601,7 @@
         // Small optimization
         if (!([srcHash, radius] in onSearches))
             return;
-        
+
         var searchRecord = onSearches[[srcHash, radius]],
             prefixes = searchRecord.prefixes;
         var callbacks = onCallbacks[[srcHash, radius]];
@@ -611,7 +611,7 @@
                 var startPrefix = prefixes[i];
                 var endPrefix = startPrefix;
                 endPrefix = startPrefix + "~";
-                
+
                 self._firebase
                     .startAt(null, startPrefix)
                     .endAt(null, endPrefix)
@@ -627,7 +627,7 @@
             delete onCallbacks[[srcHash, radius]];
             return;
         }
-        
+
         // No callback specified, therefore cancel all pending.
         if (typeof cb === 'undefined') {
             for (var i = 0; i < callbacks.length; i++) {
@@ -645,7 +645,7 @@
                 break;
             }
         }
-        
+
         // No matching callbacks
         return;
     }

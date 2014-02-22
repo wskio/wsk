@@ -11,8 +11,7 @@ function getLocation(){
   }
 }
 function showPosition(position){
-  myPosition.x = position.coords.latitude;
-  myPosition.y = position.coords.longitude;
+  myPosition.lat = position.coords.latitude;
+  myPosition.lon = position.coords.longitude;
   console.log(myPosition.x);
 }
-setInterval(getLocation, 7000);

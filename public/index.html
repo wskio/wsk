@@ -44,7 +44,7 @@
         getLocation();
 
         var getAllPosts = function(){
-          geo.onPointsNearLoc([myPosition.lat, myPosition.lon], 1, function(arr){
+          geo.onPointsNearLoc([myPosition.lat, myPosition.lon], .2, function(arr){
             var messagePositions = [];
             for (var i = 0; i < arr.length; i++) {
               displayMessage(arr[i].text);

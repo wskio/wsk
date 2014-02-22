@@ -123,16 +123,18 @@ function setMarkers(map, locations) {
     }, 100 * i);
   }
 }
-
+var postsNumber = undefined;
 var getAllPosts = function(){
   geo.onPointsNearLoc([myPosition.lat, myPosition.lon], .2, function(arr){
-    console.log(arr);
+    postsNumber = postsNumber || arr.length;
+    console.log(arr.length);
     var messagePositions = [];
     $('.message').remove();
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = arr.length - postsNumber; i < arr.length; i++) {
       displayMessage(arr[i].text);
       messagePositions.push(arr[i].position);
     };
+    postsNumber++;
     setMarkers(map, messagePositions);
   });
 }

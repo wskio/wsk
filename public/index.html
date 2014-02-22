@@ -38,12 +38,15 @@
         mapInit(); // google maps api default code
 
         getLocation();
-        setInterval(getLocation, 7000);
-        geo.getPointsNearLoc([myPosition.lat, myPosition.lon], .2, function(arr){
-          for (var i = 0; i < arr.length; i++) {
-            displayMessage(arr[i]);
-          };
-        });
+        // setInterval(getLocation, 7000);
+        var getAllPosts = function(){
+          geo.getPointsNearLoc([myPosition.lat, myPosition.lon], 1, function(arr){
+            for (var i = 0; i < arr.length; i++) {
+              displayMessage(arr[i]);
+            };
+          });
+        }
+        setTimeout(getAllPosts, 6000);
 
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){

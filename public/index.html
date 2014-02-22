@@ -24,10 +24,15 @@
       </div>
     </div>
     <script>
+
       var geoRef = new Firebase('https://wsk.firebaseio.com/geodata');
       geo = new geoFire(geoRef);
-      var displayMessage = function(msg){
-        $('#chat-log').append($('<div class="messageContainer">').append($('<div class="message">').text(msg)));
+
+      var time = function() { return new Date().getTime();};
+      var myColor = Math.floor(Math.random()*16777215).toString(16);
+      var displayMessage = function(msg, color){
+        console.log(color);
+        var message = $('#chat-log').append($('<div class="messageContainer" style="color:#'+color+'">').append($('<div class="message">').text(msg)));
       };
 
       $(document).ready(function() {
@@ -48,7 +53,8 @@
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){
             e.preventDefault();
-            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon]}, console.log('post was sent!'));
+            //var timeNow = time();
+            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
             $(this).text('');
           }
         });

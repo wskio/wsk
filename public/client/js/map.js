@@ -133,20 +133,21 @@ var messagePositions = [];
 var getAllPosts = function(){
   geo.onPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(arr){
 
-    console.log(arr.length);
+    arr.sort(function(a,b){return a.time - b.time});
+    console.log(arr);
     // $('.messageContainer').remove();
     if(firstRunComplete===false){
       if(arr.length>=7){
         for(var i = arr.length-7; i<arr.length; i++) {
           setMarkers(map, arr[i].position);
-          displayMessage(arr[i].text);
+          displayMessage(arr[i].text, arr[i].color);
           messagePositions.push(arr[i].position);
         }
         firstRunComplete = true;
       } else {
         for(var i = 0; i<arr.length; i++) {
           setMarkers(map, arr[i].position);
-          displayMessage(arr[i].text);
+          displayMessage(arr[i].text, arr[i].color);
           messagePositions.push(arr[i].position);
         }
         firstRunComplete = true;
@@ -157,14 +158,14 @@ var getAllPosts = function(){
 
         allMarkers[removeTracker].setMap(null);
         setMarkers(map, arr[arr.length-1].position);
-        displayMessage(arr[arr.length-1].text);
+        displayMessage(arr[arr.length-1].text, arr[arr.length-1].color);
         messagePositions.push(arr[arr.length-1].position);
         removeTracker++;
 
       } else {
 
         setMarkers(map, arr[arr.length-1].position);
-        displayMessage(arr[arr.length-1].text);
+        displayMessage(arr[arr.length-1].text, arr[arr.length-1].color);
         messagePositions.push(arr[arr.length-1].position);
 
       }

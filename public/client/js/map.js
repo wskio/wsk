@@ -20,7 +20,9 @@ var mapInit = function(){
   if(navigator.geolocation) {
     browserSupportFlag = true;
     navigator.geolocation.getCurrentPosition(function(position) {
-      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      myPosition.lat = position.coords.latitude;
+      myPosition.lon = position.coords.longitude;
+      initialLocation = new google.maps.LatLng(myPosition.lat,myPosition.lon);
       map.setCenter(initialLocation);
       var imageBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(initialLocation),
@@ -41,6 +43,7 @@ var mapInit = function(){
       };
       radiusCircle = new google.maps.Circle(radiusOptions);
       marker.setMap(map);
+      getAllPosts();
 
     }, function() {
       handleNoGeolocation(browserSupportFlag);
@@ -121,3 +124,15 @@ function setMarkers(map, locations) {
   }
 }
 
+var getAllPosts = function(){
+  geo.onPointsNearLoc([myPosition.lat, myPosition.lon], .2, function(arr){
+    console.log(arr);
+    var messagePositions = [];
+    $('.message').remove();
+    for (var i = 0; i < arr.length; i++) {
+      displayMessage(arr[i].text);
+      messagePositions.push(arr[i].position);
+    };
+    setMarkers(map, messagePositions);
+  });
+}

@@ -4,29 +4,37 @@ html {
 body {
   height: 100%;
   width: 100%;
-  margin: 0px; 
+  margin: 0px;
   padding: 0px;
 }
 #map-canvas {
   height: 60%;
+  width:100%;
   position:relative;
   display:block;
-  float:bottom;
+  left:0px;
+  top:0px;
+  float:top;
 }
 #chat-container {
   height:40%;
+  width:100%;
   position:relative;
+  bottom:0px;
   float:bottom;
   background-color:grey;
+  border-top:1px solid black;
 }
 #chat-input {
   height:25%;
   position:relative;
   float:bottom;
   background-color: lightgrey;
+  border-top:1px solid black;
 }
 #chat-log {
   height:75%;
+  position:relative;
   background-color:white;
   text-align:auto;
 }

@@ -52,6 +52,7 @@ body {
   left:0px;
   float:left;
   background-color: teal;
+  border-right:1px solid black;
 }
 .message{
   text-align:center;

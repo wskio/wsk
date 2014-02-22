@@ -37,7 +37,13 @@
         var geo = new geoFire(geoRef);
         mapInit(); // google maps api default code
 
+        getLocation();
         setInterval(getLocation, 7000);
+        geo.getPointsNearLoc([myPosition.lat, myPosition.lon], .2, function(arr){
+          for (var i = 0; i < arr.length; i++) {
+            displayMessage(arr[i]);
+          };
+        });
 
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){

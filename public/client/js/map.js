@@ -9,7 +9,7 @@ var mapInit = function(){
     zoom: 18,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+  map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
   // Try W3C Geolocation (Preferred)
   if(navigator.geolocation) {

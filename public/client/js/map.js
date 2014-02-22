@@ -107,13 +107,15 @@ function setMarkers(map, locations) {
       coord: [1, 1, 1, 20, 18, 20, 18 , 1],
       type: 'poly'
   };
-  // for (var i = 0; i < locations.length; i++) {
+  var markerCollection = [];
+  for (var i = 0; i < locations.length; i++) {
     console.log('running through location: ' + locations)
     // var blip = locations[i];
     var blip = locations;
+
     console.log(blip);
       var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
-      var marker = new google.maps.Marker({
+      markerCollection.push(new google.maps.Marker({
           position: myLatLng,
           animation: google.maps.Animation.DROP,
           map: map,
@@ -121,9 +123,9 @@ function setMarkers(map, locations) {
           shape: shape,
           title: 'place',
           zIndex: 0
-      });
-      allMarkers.push(marker);
-  // }
+      }));
+      //allMarkers.push(marker);
+  }
 }
 var postsNumber = 0;
 var removeTracker = 0;
@@ -156,7 +158,7 @@ var getAllPosts = function(){
     } else {
       if(messagePositions.length>5){
 
-        allMarkers[removeTracker].setMap(null);
+        //allMarkers[removeTracker].setMap(null);
         setMarkers(map, arr[arr.length-1].position);
         displayMessage(arr[arr.length-1].text, arr[arr.length-1].color);
         messagePositions.push(arr[arr.length-1].position);

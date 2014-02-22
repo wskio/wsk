@@ -1,17 +1,18 @@
+var radiusCircle;
 
 var mapInit = function(){
   var initialLocation;
   var siberia = new google.maps.LatLng(60, 105);
   var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
   var browserSupportFlag =  new Boolean();
-  var radiusCircle;
+
   var myOptions = {
     draggable: false,
     panControl: false,
     disableDoubleClickZoom: true,
     scrollwheel: false,
     disableDefaultUI: true,
-    zoom: 17,
+    zoom: 19,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
@@ -39,7 +40,7 @@ var mapInit = function(){
         fillOpacity: 0.35,
         map: map,
         center: initialLocation,
-        radius: 200,
+        radius: 50,
       };
       radiusCircle = new google.maps.Circle(radiusOptions);
       marker.setMap(map);
@@ -109,7 +110,6 @@ function setMarkers(map, locations) {
   for (var i = 0; i < locations.length; i++) {
     console.log('running through location: ' + locations[i])
     var blip = locations[i];
-    setTimeout(function(){
       var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
       var marker = new google.maps.Marker({
           position: myLatLng,
@@ -120,13 +120,15 @@ function setMarkers(map, locations) {
           title: 'place',
           zIndex: 0
       });
-    }, 100 * i);
   }
 }
 var postsNumber = undefined;
+var firstRun = false;
+
 var getAllPosts = function(){
-  geo.onPointsNearLoc([myPosition.lat, myPosition.lon], .2, function(arr){
+  geo.onPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(arr){
     postsNumber = postsNumber || arr.length;
+
     console.log(arr.length);
     var messagePositions = [];
     $('.message').remove();

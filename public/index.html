@@ -6,6 +6,7 @@
     <link href="client/css/desktopstyle.css" media="(min-width:800px)" rel="stylesheet" type="text/css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
+    <script type='text/javascript' src='client/js/updatePosition.js'></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCU5HEJgRBcM9NbmGYjIqLUb5GwNnICEXk&sensor=true">
     </script>
@@ -22,11 +23,12 @@
       //ha
       $(document).ready(function() {
         var geoRef = new Firebase('https://wsk.firebaseio.com/geodata');
-          //geo = new geoFire(geoRef);
+        var geo = new geoFire(geoRef);
         mapInit(); // google maps api default code
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){
             e.preventDefault();
+            geo.insertByLoc([88,88], $(this).text(), console.log('post was sent!'));
             console.log($(this).text());
             $(this).text('');
           }

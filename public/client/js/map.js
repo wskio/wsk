@@ -1,5 +1,6 @@
 var radiusCircle;
 var map;
+var user;
 
 var mapInit = function(){
   var initialLocation;

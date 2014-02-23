@@ -22,7 +22,7 @@
           <div id="input-frame">
             <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1"></div>
           </div>
-          <div id="send-button">Send</div>
+          <div id="send-button"></div>
         </div>
         <div id="chat-log">
         </div>
@@ -54,7 +54,7 @@
         mapInit(); // google maps api default
 
         $('#chat-input').on('keypress',function(e){
-          if (e.keyCode === 13 && $(this).text().length>0){
+          if (e.keyCode === 13){
             e.preventDefault();
             $('#send-button').trigger('click');
           }

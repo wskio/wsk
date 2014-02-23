@@ -144,16 +144,18 @@ function setMarkers(map, locations) {
       allMarkers.push(marker);
   // }
 }
-var postsNumber = 0;
 var removeTracker = 0;
 var firstRunComplete = false;
-
 var messagePositions = [];
+
 var getAllPosts = function(){
+  //get all points within a radius around my location
   geo.onPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(arr){
 
     arr.sort(function(a,b){return a.time - b.time});
+    //if hasn't run the getallposts yet, do initial run
     if(firstRunComplete===false){
+
       if(arr.length>=7){
         for(var i = arr.length-7; i<arr.length; i++) {
           setMarkers(map, arr[i].position);
@@ -191,6 +193,11 @@ var getAllPosts = function(){
   geo.offPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(){
     console.log('a node has left the radius');
   });
+};
+
+var radiusChange = function(){
+
+  updateMap();
 };
 
 

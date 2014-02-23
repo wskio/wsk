@@ -62,7 +62,6 @@
           $(this).css({'color':'black'});
         });
 
-        mapInit(); // google maps api default
 
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){
@@ -79,7 +78,13 @@
             $('#chat-input').text('');
           }
         });
+
+        //on zoom change, update radiusCircle with new options
+
       });
+
+      mapInit(); // initializing google maps (see map.js)
+      
     </script>
   </body>
 </html>

@@ -24,7 +24,7 @@
               >'.'<
             </div>
           </div>
-          <div id="send-button">Go!</div>
+          <div id="send-button">Send</div>
         </div>
         <div id="chat-log">
         </div>
@@ -51,13 +51,6 @@
         $('#chat-input').on('focus', function(){
           $(this).text('');
           $(this).css({'color':'black'});
-        });
-        $('#chat-input').on('focusout', function(){
-          $(this).text(">'.'<");
-          $(this).css({'color':'grey'});
-          if ($(this).is(':focus')){
-            $(this).blur();
-          }
         });
 
         mapInit(); // google maps api default

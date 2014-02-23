@@ -24,13 +24,13 @@ body {
   left:0px;
   top:0px;
 }
-#banner {
-  position:absolute;
-  bottom:0px;
-  color: rgb(103, 199, 236);
-  height:20px;
-}
 #chat-container {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   height:40%;
   width:100%;
   position:relative;
@@ -40,10 +40,16 @@ body {
   border-top: 8px rgb(103, 199, 236);
 }
 #input-container{
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   height:20%;
   position:relative;
   float:bottom;
-  border-top:1px solid lightgrey;
+  /*border-top:1px solid lightgrey;*/
   background-color: rgb(96, 137, 170);
 }
 #send-button{
@@ -59,7 +65,7 @@ body {
   text-align:center;
   vertical-align: auto;
   height:70%;
-  top:7px;
+  top:15%;
   right:1%;
   width: 12%;
   background-color: lightgreen;
@@ -70,7 +76,7 @@ body {
   border-bottom: 1px solid black;
 }
 #send-button:active{
-  top:8px;
+  top:18%;
   border-bottom: 0px solid black;
   background-color:gold;
 }
@@ -78,21 +84,24 @@ body {
   position:relative;
   height:70%;
   width:69%;
-  top:7px;
+  top:14.5%;
   margin-left:15%;
   display:inline-block;
   background-color: white;
   border-radius: 10px;
 }
 #chat-input {
+  display:inline-block;
   outline: 0;
   font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
   padding:5px;
   padding-top:8px;
   font-size:15px;
-  height:100%;
+  line-height:90%;
+  height:90%;
   width:95%;
   margin:auto;
+  padding-left:2px;
   position:relative;
   text-align:center;
   white-space: nowrap;

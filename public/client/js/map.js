@@ -238,8 +238,6 @@ var getAllPosts = function(){
   });
 };
 
-<<<<<<< HEAD
-=======
 var radiusChange = function(zlvl){
   //zlvl is the new zoom number to which we need to update our radius to
 
@@ -271,8 +269,6 @@ var radiusChange = function(zlvl){
   updateMap();
 };
 
-
->>>>>>> 26d8eccd08ab853ebc363d58e9ca50c23ff335d4
 var updateMap = function(){
   getLocation();
   myLoc = new google.maps.LatLng(myPosition.lat,myPosition.lon);

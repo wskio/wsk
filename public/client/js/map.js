@@ -66,17 +66,7 @@ var mapInit = function(){
     }
     map.setCenter(initialLocation);
   };
-
-
-  // var mapOptions = {
-  //   center: new google.maps.LatLng(-34.397, 150.644),
-  //   zoom: 12
-  // };
-  // var map = new google.maps.Map(document.getElementById("map-canvas"),
-  //     mapOptions);
-  // adds marker at position defined below
   google.maps.event.addDomListener(window, 'load', "initialize");
-  // marker.setMap(map);
 }
 var allMarkers = [];
 function setMarkers(map, locations) {
@@ -147,7 +137,7 @@ var getAllPosts = function(){
         }
         firstRunComplete = true;
       }
-      
+
     } else {
       if(messagePositions.length>7){
 

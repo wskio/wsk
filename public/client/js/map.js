@@ -13,9 +13,11 @@ var mapInit = function(){
     scrollwheel: false,
     disableDefaultUI: false,
     zoom: 17,
-     mapTypeControlOptions: {
+    streetViewControl: false,
+    mapTypeControl: false,
+    mapTypeControlOptions: {
        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-     }
+    }
     //mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
@@ -196,7 +198,8 @@ var getAllPosts = function(){
 };
 
 var radiusChange = function(){
-
+  radiusCircle.setMap(null);
+  //not close to finished
   updateMap();
 };
 

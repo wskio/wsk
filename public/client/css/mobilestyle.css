@@ -82,9 +82,14 @@ body {
   overflow:auto;
 }
 #chat-log {
+<<<<<<< HEAD
   border-top: 1px solid lightgrey;
   padding-bottom: 0px;
   height:80%;
+=======
+  padding-bottom: 4px;
+  height:82%;
+>>>>>>> 11e792f35f7df9dfe8bf6032727717bcb0aec2ef
   position:relative;
   background-color: rgb(171, 223, 228);;
   text-align:center;
@@ -109,10 +114,11 @@ body {
   text-align: center;
   border-radius: 10px;
   width: auto;
+  text-align: left;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
   line-height:20px;
   background-color: rgb(253, 252, 242);
   padding: 8px;
-  margin-top: 3px;
   margin-left: 2%;
   margin-right: 2%;
 }

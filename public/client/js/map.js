@@ -12,10 +12,41 @@ var mapInit = function(){
     disableDoubleClickZoom: true,
     scrollwheel: false,
     disableDefaultUI: true,
-    zoom: 19,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    zoom: 18,
+     mapTypeControlOptions: {
+       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+     }
+    //mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+
+  var styledMap = new google.maps.StyledMapType(styles,
+    {name: "Styled Map"});
+
+  var styles = [
+    {
+      stylers: [
+        { hue: "rgb(86, 94, 94)" },
+        { saturation: -1 }
+      ]
+    },{
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 100 },
+        { visibility: "simplified" }
+      ]
+    },{
+      featureType: "road",
+      elementType: "labels",
+      stylers: [
+        { visibility: "off" }
+      ]
+    }
+  ];
+
   map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+  map.mapTypes.set('map_style', styledMap);
+  map.setMapTypeId('map_style');
 
   // Try W3C Geolocation (Preferred)
   if(navigator.geolocation) {
@@ -40,7 +71,7 @@ var mapInit = function(){
         fillOpacity: 0.35,
         map: map,
         center: initialLocation,
-        radius: 50,
+        radius: 80,
       };
       radiusCircle = new google.maps.Circle(radiusOptions);
       marker.setMap(map);
@@ -156,4 +187,17 @@ var getAllPosts = function(){
       }
     }
   });
+  geo.offPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(){
+    console.log('a node has left the radius');
+  });
+};
+
+
+var updateMap = function(){
+  console.log('center was reset!');
+  getLocation();
+  myLoc = new google.maps.LatLng(myPosition.lat,myPosition.lon);
+  map.setCenter(myLoc);
 }
+
+setInterval(updateMap,10000);

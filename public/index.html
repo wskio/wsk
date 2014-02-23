@@ -43,7 +43,6 @@
         $('.messageContainer').animate({'opacity':1});
         $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
       };
-      var chatTimes =[];
 
       $(document).ready(function() {
         window.scrollTo(0,1); // on mobile this gets rid of the address bar
@@ -52,11 +51,11 @@
           $(this).text('');
           $(this).css({'color':'black'});
         });
-        $('#chat-input').on('focusout', function(){
-          $(this).text(">'.'<");
-          $(this).css({'color':'grey'});
-          if ($(this).is(':focus')){
-            $(this).blur();
+
+        $('#send-button').on('click',function(){
+          if($('#chat-input').text()){
+            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$('#chat-input').text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
+            $('#chat-input').text('');
           }
         });
 
@@ -64,10 +63,9 @@
         mapInit(); // google maps api default
 
         $('#chat-input').on('keypress',function(e){
-          if (e.keyCode === 13 && $(this).text().length>0){
+          if (e.keyCode === 13){
             e.preventDefault();
-            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
-            $(this).text('');
+            $('#send-button').trigger('click');
           }
         });
       });

@@ -34,19 +34,18 @@ body {
   bottom:0px;
   float:bottom;
   background-color:grey;
-  border-top: 8px rgb(103, 199, 236);
+  border-top: 8px rgb(171, 223, 228);
 }
 #input-container{
   height:18%;
   position:relative;
   float:bottom;
-  border-top:1px solid lightgrey;
-  background-color: rgb(88, 200, 211);
+  background-color: black;
 }
 #input-frame{
   position:relative;
-  height:75%;
-  width:75%;
+  height:74%;
+  width:84%;
   top:12.5%;
   margin-left:2%;
   margin-right:2%;
@@ -56,33 +55,45 @@ body {
   overflow:auto;
 }
 #chat-input {
-  padding:5px;
+  padding:1.4%;
   font-size:15px;
   height:100%;
   width:100%;
   margin:auto;
   position:relative;
   text-align:center;
+  white-space: nowrap;
   /*display: inline-block;*/
   overflow:auto;
 }
-#send-button{
-  position:relative;
+#send-button {
+  cursor:default;
+  user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  
+  position:absolute;
+  top:0px;
   display:inline-block;
   margin:auto;
   text-align:center;
-  height:50%;
-  top:2px;
-  margin-right:2px;
+  height:75%;
+  line-height: 34px;
+  top:12.5%;
   background-color: lightgreen;
+  border-radius: 10px;
   width: 10%;
+}
+#send-button:active{
+  background-color: gold;
 }
 #chat-log {
   border-top: 1px solid lightgrey;
   padding-bottom: 0px;
   height:82%;
   position:relative;
-  background-color: rgb(171, 223, 228);;
+  background-color: rgb(171, 223, 228);
   text-align:auto;
   overflow:auto;
 }
@@ -90,7 +101,7 @@ body {
   width:100%;
   float:top;
   padding-bottom:1px;
-  background-color: rgb(171, 223, 228);;
+  background-color: rgb(171, 223, 228);
 }
 .icon{
   width:20px;
@@ -111,10 +122,4 @@ body {
   margin-top: 3px;
   margin-left: 2%;
   margin-right: 2%;
-}
-.message:hover{
-  background-color: rgb(214, 238, 203);
-}
-.message:click{
-  background-color: rgb(214, 238, 203);
 }

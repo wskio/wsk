@@ -68,7 +68,6 @@ body {
   width: 10%;
 }
 #chat-log {
-  border-top: 1px solid lightgrey;
   padding-bottom: 4px;
   height:82%;
   position:relative;
@@ -95,10 +94,10 @@ body {
   text-align: left;
   border-radius: 10px;
   text-align: left;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
   line-height:20px;
   background-color: rgb(255, 252, 252);
   padding: 8px;
-  margin-top: 3px;
   margin-left: 2%;
   margin-right: 2%;
 }

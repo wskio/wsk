@@ -25,7 +25,7 @@ var mapInit = function(){
   var styles = [
     {
       stylers: [
-        { hue: "#00ffe6" },
+        { hue: "rgb(86, 94, 94)" },
         { saturation: -1 }
       ]
     },{

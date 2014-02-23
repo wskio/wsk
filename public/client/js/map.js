@@ -107,15 +107,10 @@ function setMarkers(map, locations) {
       coord: [1, 1, 1, 20, 18, 20, 18 , 1],
       type: 'poly'
   };
-  var markerCollection = [];
-  for (var i = 0; i < locations.length; i++) {
-    console.log('running through location: ' + locations)
-    // var blip = locations[i];
-    var blip = locations;
-
+  var blip = locations;
     console.log(blip);
       var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
-      markerCollection.push(new google.maps.Marker({
+      var marker = new google.maps.Marker({
           position: myLatLng,
           animation: google.maps.Animation.DROP,
           map: map,
@@ -123,9 +118,9 @@ function setMarkers(map, locations) {
           shape: shape,
           title: 'place',
           zIndex: 0
-      }));
-      //allMarkers.push(marker);
-  }
+      });
+      allMarkers.push(marker);
+  // }
 }
 var postsNumber = 0;
 var removeTracker = 0;
@@ -136,11 +131,9 @@ var getAllPosts = function(){
   geo.onPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(arr){
 
     arr.sort(function(a,b){return a.time - b.time});
-    console.log(arr);
-    // $('.messageContainer').remove();
     if(firstRunComplete===false){
-      if(arr.length>=5){
-        for(var i = arr.length-5; i<arr.length; i++) {
+      if(arr.length>=7){
+        for(var i = arr.length-7; i<arr.length; i++) {
           setMarkers(map, arr[i].position);
           displayMessage(arr[i].text, arr[i].color);
           messagePositions.push(arr[i].position);
@@ -154,11 +147,11 @@ var getAllPosts = function(){
         }
         firstRunComplete = true;
       }
-      // postsNumber = arr.length;
+      
     } else {
-      if(messagePositions.length>5){
+      if(messagePositions.length>7){
 
-        //allMarkers[removeTracker].setMap(null);
+        allMarkers[removeTracker].setMap(null);
         setMarkers(map, arr[arr.length-1].position);
         displayMessage(arr[arr.length-1].text, arr[arr.length-1].color);
         messagePositions.push(arr[arr.length-1].position);

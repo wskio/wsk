@@ -44,6 +44,7 @@ body {
   background-color: rgb(88, 200, 211);
 }
 #send-button{
+  line-height: 35px;
   position:relative;
   display:inline-block;
   margin:auto;
@@ -55,7 +56,7 @@ body {
   background-color: lightgreen;
   margin-left:2%;
   margin-right:2%;
-  border-radius: 50px;
+  border-radius: 10px;
   overflow:auto;
 }
 #input-frame{
@@ -82,14 +83,9 @@ body {
   overflow:auto;
 }
 #chat-log {
-<<<<<<< HEAD
   border-top: 1px solid lightgrey;
   padding-bottom: 0px;
   height:80%;
-=======
-  padding-bottom: 4px;
-  height:82%;
->>>>>>> 11e792f35f7df9dfe8bf6032727717bcb0aec2ef
   position:relative;
   background-color: rgb(171, 223, 228);;
   text-align:center;

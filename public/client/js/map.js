@@ -110,11 +110,16 @@ var mapInit = function(){
       map.panTo(marker.getPosition());
     }, 3000);
   });
-  google.maps.event.addListener(map, 'zoom_changed', function() {
+  // google.maps.event.addListener(map, 'zoom_changed', function() {
+  //   // 2 seconds after the zoom of the map has changed, adjust radius
+  //   window.setTimeout(function() {
+  //     radiusChange(map.zoom);
+  //   }, 2000);
+  // });
+  google.maps.event.addListener(map, 'bounds_changed', function() {
     // 2 seconds after the zoom of the map has changed, adjust radius
-    window.setTimeout(function() {
-      radiusChange(map.zoom);
-    }, 2000);
+    console.log('listening to bounds_changed');
+    setProximityFromMap();
   });
 }
 var allMarkers = [];
@@ -252,5 +257,24 @@ var updateMap = function(){
   marker.setPosition(myLoc);
   radiusCircle.setCenter(myLoc);
 }
+
+var setProximityFromMap = function() {
+  var bounds = map.getBounds();
+
+  // Then the points
+  var swPoint = bounds.getSouthWest();
+  var nePoint = bounds.getNorthEast();
+
+  // Now, each individual coordinate
+  var swLat = swPoint.lat();
+  var swLng = swPoint.lng();
+  var neLat = nePoint.lat();
+  var neLng = nePoint.lng();
+
+  var proximitymeter = google.maps.geometry.spherical.computeDistanceBetween(swPoint, nePoint);
+  var proximitymiles = proximitymeter * 0.000621371192;
+  proxmity = proximitymiles;
+  console.log("Proxmity " + proximitymiles + " miles");
+};
 
 // setInterval(updateMap,10000);

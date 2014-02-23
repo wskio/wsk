@@ -11,6 +11,8 @@ body {
   position:relative;
   float:bottom;
   overflow:auto;
+  overflow-y:hidden;
+  overflow-x:hidden;
 }
 #map-canvas {
   height: 60%;
@@ -104,6 +106,8 @@ body {
   background-color: rgb(171, 223, 228);;
   text-align:center;
   overflow:auto;
+  overflow-y:hidden;
+  overflow-x:hidden;
 }
 .messageContainer{
   width:100%;

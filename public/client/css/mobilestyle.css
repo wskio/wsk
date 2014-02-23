@@ -132,6 +132,9 @@ body {
   line-height:20px;
   background-color: rgb(253, 252, 242);
   padding: 8px;
+  overflow:scroll;
+  white-space: nowrap;
+  overflow-y:hidden;
   margin-left: 2%;
   margin-right: 2%;
 }

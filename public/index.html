@@ -36,10 +36,14 @@
       var time = function() { return new Date().getTime();};
       var myColor = Math.floor(Math.random()*16777215).toString(16);
       var displayMessage = function(msg, color){
-        console.log(color);
-        var message = $('#chat-log').prepend($('<div class="messageContainer" style="opacity:0;color:#'+color+'">').append($('<div class="message">').text(msg)));
-        $('.messageContainer').animate({'opacity':1});
-        $('#chat-log').scrollTop();
+        if(msg.indexOf('.gif')!== -1){
+          var message = $('#chat-log').prepend($('<img max-height='+($('#chat-log').height*0.75)+'px src='+msg+'>'));
+          $('#chat-log').scrollTop();
+        } else {
+          var message = $('#chat-log').prepend($('<div class="messageContainer" style="opacity:0;color:#'+color+'">').append($('<div class="message">').text(msg)));
+          $('.messageContainer').animate({'opacity':1});
+          $('#chat-log').scrollTop();
+        }
       };
       var chatTimes =[];
 

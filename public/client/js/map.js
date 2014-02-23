@@ -60,9 +60,17 @@ var mapInit = function(){
       new google.maps.LatLng(initialLocation),
       new google.maps.LatLng(initialLocation));
 
-      marker = new google.maps.Marker({
+      user = new google.maps.Marker({
         position: initialLocation,
-        title: 'Click to zoom'
+        title: 'Click to zoom',
+        map: map,
+        icon: {
+          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+          scale: 5,
+          fillColor: 'rgb(96, 137, 170)',
+          strokeColor: 'rgb(96, 137, 170)'
+        },
+        animation: google.maps.Animation.BOUNCE
       });
       var radiusOptions = {
         strokeColor: 'rgb(35, 178, 192)',
@@ -75,7 +83,7 @@ var mapInit = function(){
         radius: 80,
       };
       radiusCircle = new google.maps.Circle(radiusOptions);
-      marker.setMap(map);
+      user.setMap(map);
       getAllPosts();
 
     }, function() {
@@ -101,19 +109,20 @@ var mapInit = function(){
   google.maps.event.addDomListener(window, 'load', "initialize");
 }
 var allMarkers = [];
-function setMarkers(map, locations) {
-  // Add markers to the map
+function setMarkers(map, friend) {
+  console.log(friend);
+  // Add users to the map
 
   // Marker sizes are expressed as a Size of X,Y
   // where the origin of the image (0,0) is located
   // in the top left of the image.
 
-  // Origins, anchor positions and coordinates of the marker
+  // Origins, anchor positions and coordinates of the user
   // increase in the X direction to the right and in
   // the Y direction down.
   var image = {
     url: 'client/img/redcircle.png',
-    // This marker is 20 pixels wide by 32 pixels tall.
+    // This user is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(50, 50),
     // The origin for this image is 0,0.
     origin: new google.maps.Point(0,0),
@@ -129,19 +138,25 @@ function setMarkers(map, locations) {
       coord: [1, 1, 1, 20, 18, 20, 18 , 1],
       type: 'poly'
   };
-  var blip = locations;
+  var blip = friend.position;
     console.log(blip);
       var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
-      var marker = new google.maps.Marker({
+      var user = new google.maps.Marker({
           position: myLatLng,
           animation: google.maps.Animation.DROP,
           map: map,
-          icon: image,
-          shape: shape,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 9,
+            strokeColor: friend.color,
+            strokeOpacity: 50,
+            strokeWeight: 3,
+            fillColor: friend.color,
+          },
           title: 'place',
           zIndex: 0
       });
-      allMarkers.push(marker);
+      allMarkers.push(user);
   // }
 }
 var postsNumber = 0;
@@ -156,14 +171,14 @@ var getAllPosts = function(){
     if(firstRunComplete===false){
       if(arr.length>=7){
         for(var i = arr.length-7; i<arr.length; i++) {
-          setMarkers(map, arr[i].position);
+          setMarkers(map, arr[i]);
           displayMessage(arr[i].text, arr[i].color);
           messagePositions.push(arr[i].position);
         }
         firstRunComplete = true;
       } else {
         for(var i = 0; i<arr.length; i++) {
-          setMarkers(map, arr[i].position);
+          setMarkers(map, arr[i]);
           displayMessage(arr[i].text, arr[i].color);
           messagePositions.push(arr[i].position);
         }
@@ -174,14 +189,14 @@ var getAllPosts = function(){
       if(messagePositions.length>7){
 
         allMarkers[removeTracker].setMap(null);
-        setMarkers(map, arr[arr.length-1].position);
+        setMarkers(map, arr[arr.length-1]);
         displayMessage(arr[arr.length-1].text, arr[arr.length-1].color);
         messagePositions.push(arr[arr.length-1].position);
         removeTracker++;
 
       } else {
 
-        setMarkers(map, arr[arr.length-1].position);
+        setMarkers(map, arr[arr.length-1]);
         displayMessage(arr[arr.length-1].text, arr[arr.length-1].color);
         messagePositions.push(arr[arr.length-1].position);
 
@@ -195,11 +210,10 @@ var getAllPosts = function(){
 
 
 var updateMap = function(){
-  console.log('center was reset!');
   getLocation();
   myLoc = new google.maps.LatLng(myPosition.lat,myPosition.lon);
   map.setCenter(myLoc);
-  marker.setPosition(myLoc);
+  user.setPosition(myLoc);
   radiusCircle.setCenter(myLoc);
 }
 

@@ -54,7 +54,11 @@
       };
       var chatTimes =[];
 
+      mapInit(); // initializing google maps (see map.js)
+
       $(document).ready(function() {
+
+
         window.scrollTo(0,1); // on mobile this gets rid of the address bar
         $('#app-container').css('height',$(window).height());
         $('#chat-input').on('focus', function(){
@@ -62,7 +66,6 @@
           $(this).css({'color':'black'});
         });
 
-        mapInit(); // google maps api default
 
 
         $('#chat-input').on('keypress',function(e){
@@ -80,22 +83,9 @@
             $('#chat-input').text('');
           }
         });
-        // google.maps.event.trigger(map, 'resize');
-
-        // google.maps.event.addListener(map, 'bounds_changed', function(bounds) {
-        //     var bounds = map.getBounds();
-        //     chatTimes = [];
-        //     removeTracker = 0;
-        //     firstRunComplete = false;
-        //     messagePositions = [];
-
-        //     $('.messageContainer').remove();
-        //     console.log(bounds);
-
-        //     radiusCircle.radius *= 2;
-        //     getAllPosts();
-        // });
       });
+
+
     </script>
   </body>
 </html>

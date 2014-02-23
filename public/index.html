@@ -20,11 +20,9 @@
       <div id="chat-container">
         <div id="input-container">
           <div id="input-frame">
-            <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">
-              >'.'<
-            </div>
+            <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1"></div>
           </div>
-          <div id="send-button">Send</div>
+          <div id="send-button"></div>
         </div>
         <div id="chat-log">
         </div>
@@ -38,10 +36,14 @@
       var time = function() { return new Date().getTime();};
       var myColor = Math.floor(Math.random()*16777215).toString(16);
       var displayMessage = function(msg, color){
-        console.log(color);
-        var message = $('#chat-log').prepend($('<div class="messageContainer" style="opacity:0;color:#'+color+'">').append($('<div class="message">').text(msg)));
-        $('.messageContainer').animate({'opacity':1});
-        $('#chat-log').scrollTop();
+        if(msg.indexOf('.gif')!== -1){
+          var message = $('#chat-log').prepend($('<img max-height='+($('#chat-log').height*0.75)+'px src='+msg+'>'));
+          $('#chat-log').scrollTop();
+        } else {
+          var message = $('#chat-log').prepend($('<div class="messageContainer" style="opacity:0;color:#'+color+'">').append($('<div class="message">').text(msg)));
+          $('.messageContainer').animate({'opacity':1});
+          $('#chat-log').scrollTop();
+        }
       };
       var chatTimes =[];
 
@@ -56,19 +58,20 @@
         mapInit(); // google maps api default
 
         $('#chat-input').on('keypress',function(e){
-          if (e.keyCode === 13 && $(this).text().length>0){
-            var currentTime = Date();
-            chatTimes.push(currentTime);
+          if (e.keyCode === 13){
             e.preventDefault();
-            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
-            $(this).text('');
+            $('#send-button').trigger('click');
           }
         });
 
         $('#send-button').on('click',function(){
-          $('#chat-input').trigger('keypress');
+          if ($('#chat-input').text()){
+            var currentTime = Date();
+            chatTimes.push(currentTime);
+            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$('#chat-input').text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
+            $('#chat-input').text('');
+          }
         });
-
       });
     </script>
   </body>

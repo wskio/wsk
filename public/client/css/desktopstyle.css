@@ -16,7 +16,7 @@ body {
 #map-canvas {
   height: 100%;
   width:70%;
-  position:absolute;
+  position:relative;
   display:block;
   left:0px;
 }
@@ -64,6 +64,7 @@ body {
   border-right:1px solid black;
 }
 .message{
+  overflow:auto;
   text-align:center;
   line-height:20px;
   border-radius: 10px;

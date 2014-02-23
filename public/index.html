@@ -57,9 +57,9 @@
 
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13 && $(this).text().length>0){
+            e.preventDefault();
             var currentTime = Date();
             chatTimes.push(currentTime);
-            e.preventDefault();
             geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
             $(this).text('');
           }

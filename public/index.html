@@ -18,15 +18,15 @@
     <div id="app-container">
       <div id="map-canvas"></div>
       <div id="chat-container">
-        <div id="chat-log">
-        </div>
         <div id="input-container">
           <div id="input-frame">
             <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">
               >'.'<
             </div>
           </div>
-          <div id="send-button">Send</div>
+          <div id="send-button">Go!</div>
+        </div>
+        <div id="chat-log">
         </div>
       </div>
     </div>
@@ -60,16 +60,22 @@
           }
         });
 
-
         mapInit(); // google maps api default
 
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13 && $(this).text().length>0){
+            var currentTime = Date();
+            chatTimes.push(currentTime);
             e.preventDefault();
             geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
             $(this).text('');
           }
         });
+
+        $('#send-button').on('click',function(){
+          $('#chat-input').trigger('keypress');
+        });
+
       });
     </script>
   </body>

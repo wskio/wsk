@@ -65,7 +65,7 @@ body {
   text-align:center;
   vertical-align: auto;
   height:70%;
-  top:7px;
+  top:15%;
   right:1%;
   width: 12%;
   background-color: lightgreen;
@@ -76,7 +76,7 @@ body {
   border-bottom: 1px solid black;
 }
 #send-button:active{
-  top:8px;
+  top:18%;
   border-bottom: 0px solid black;
   background-color:gold;
 }
@@ -91,6 +91,7 @@ body {
   border-radius: 10px;
 }
 #chat-input {
+  display:inline-block;
   outline: 0;
   font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
   padding:5px;
@@ -100,6 +101,7 @@ body {
   height:90%;
   width:95%;
   margin:auto;
+  padding-left:2px;
   position:relative;
   text-align:center;
   white-space: nowrap;

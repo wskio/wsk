@@ -11,7 +11,7 @@ var displayError = function(error){
 var showPosition = function(position){
   myPosition.lat = position.coords.latitude;
   myPosition.lon = position.coords.longitude;
-  console.log(myPosition.lat, myPosition.lon);
+  //console.log(myPosition.lat, myPosition.lon);
 };
 
 var getLocation = function(){

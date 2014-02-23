@@ -80,14 +80,21 @@
             $('#chat-input').text('');
           }
         });
-        google.maps.event.trigger(map, 'resize');
+        // google.maps.event.trigger(map, 'resize');
 
-        google.maps.event.addListener(map, 'bounds_changed', function(bounds) {
-            var bounds = map.getBounds();
-            console.log(bounds);
-            //radiusCircle.radius
-            getAllPosts();
-        });
+        // google.maps.event.addListener(map, 'bounds_changed', function(bounds) {
+        //     var bounds = map.getBounds();
+        //     chatTimes = [];
+        //     removeTracker = 0;
+        //     firstRunComplete = false;
+        //     messagePositions = [];
+
+        //     $('.messageContainer').remove();
+        //     console.log(bounds);
+
+        //     radiusCircle.radius *= 2;
+        //     getAllPosts();
+        // });
       });
     </script>
   </body>

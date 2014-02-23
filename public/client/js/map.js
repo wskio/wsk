@@ -25,8 +25,8 @@ var mapInit = function(){
   var styles = [
     {
       stylers: [
-        { hue: "rgb(86, 94, 94)" },
-        { saturation: -1 }
+        { color: "rgb(86, 94, 94)" },
+        { saturation: 100 }
       ]
     },{
       featureType: "road",
@@ -59,7 +59,7 @@ var mapInit = function(){
       var imageBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(initialLocation),
       new google.maps.LatLng(initialLocation));
-      var marker = new google.maps.Marker({
+      marker = new google.maps.Marker({
         position: initialLocation,
         title: 'Click to zoom'
       });
@@ -198,6 +198,8 @@ var updateMap = function(){
   getLocation();
   myLoc = new google.maps.LatLng(myPosition.lat,myPosition.lon);
   map.setCenter(myLoc);
+  marker.setPosition(myLoc);
+  radiusCircle.setCenter(myLoc);
 }
 
 setInterval(updateMap,10000);

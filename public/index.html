@@ -54,7 +54,11 @@
       };
       var chatTimes =[];
 
+      mapInit(); // initializing google maps (see map.js)
+      
       $(document).ready(function() {
+        
+
         window.scrollTo(0,1); // on mobile this gets rid of the address bar
         $('#app-container').css('height',$(window).height());
         $('#chat-input').on('focus', function(){
@@ -79,12 +83,9 @@
           }
         });
 
-        //on zoom change, update radiusCircle with new options
-
       });
 
-      mapInit(); // initializing google maps (see map.js)
-      
+
     </script>
   </body>
 </html>

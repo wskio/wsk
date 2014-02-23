@@ -55,9 +55,9 @@
       var chatTimes =[];
 
       mapInit(); // initializing google maps (see map.js)
-      
+
       $(document).ready(function() {
-        
+
 
         window.scrollTo(0,1); // on mobile this gets rid of the address bar
         $('#app-container').css('height',$(window).height());
@@ -65,6 +65,7 @@
           $(this).text('');
           $(this).css({'color':'black'});
         });
+
 
 
         $('#chat-input').on('keypress',function(e){
@@ -82,7 +83,6 @@
             $('#chat-input').text('');
           }
         });
-
       });
 
 

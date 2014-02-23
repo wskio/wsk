@@ -144,11 +144,10 @@ function setMarkers(map, locations) {
       allMarkers.push(marker);
   // }
 }
-var postsNumber = 0;
 var removeTracker = 0;
 var firstRunComplete = false;
-
 var messagePositions = [];
+
 var getAllPosts = function(){
   geo.onPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(arr){
 

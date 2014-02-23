@@ -57,6 +57,7 @@
 
         mapInit(); // google maps api default
 
+
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13){
             e.preventDefault();
@@ -71,6 +72,14 @@
             geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$('#chat-input').text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
             $('#chat-input').text('');
           }
+        });
+        google.maps.event.trigger(map, 'resize');
+
+        google.maps.event.addListener(map, 'bounds_changed', function(bounds) {
+            var bounds = map.getBounds();
+            console.log(bounds);
+            //radiusCircle.radius
+            getAllPosts();
         });
       });
     </script>

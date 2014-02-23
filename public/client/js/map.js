@@ -1,4 +1,5 @@
 var radiusCircle;
+var map;
 
 var mapInit = function(){
   var initialLocation;
@@ -28,7 +29,15 @@ var mapInit = function(){
         { color: "rgb(86, 94, 94)" },
         { saturation: 100 }
       ]
-    },{
+    },
+    {
+     featureType: "road.freeway",
+      stylers: [
+        { color: "rgb(86, 94, 94)"},
+        { saturation: 100 }
+      ]
+    },
+    {
       featureType: "road",
       elementType: "geometry",
       stylers: [
@@ -108,9 +117,9 @@ var mapInit = function(){
   };
   google.maps.event.addDomListener(window, 'load', "initialize");
 }
+
 var allMarkers = [];
 function setMarkers(map, friend) {
-  console.log(friend);
   // Add users to the map
 
   // Marker sizes are expressed as a Size of X,Y
@@ -139,7 +148,6 @@ function setMarkers(map, friend) {
       type: 'poly'
   };
   var blip = friend.position;
-    console.log(blip);
       var myLatLng = new google.maps.LatLng(blip[0], blip[1]);
       var user = new google.maps.Marker({
           position: myLatLng,
@@ -207,7 +215,6 @@ var getAllPosts = function(){
     console.log('a node has left the radius');
   });
 };
-
 
 var updateMap = function(){
   getLocation();

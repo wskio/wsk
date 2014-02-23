@@ -43,36 +43,46 @@ body {
   border-top:1px solid lightgrey;
   background-color: rgb(88, 200, 211);
 }
-#chat-input {
-  vertical-align: center;
-  height:75%;
+#input-frame{
   position:relative;
+  height:75%;
+  width:75%;
   top:12.5%;
-  width: 75%;
   margin-left:2%;
   margin-right:2%;
-  text-align:center;
+  display:inline-block;
   background-color: white;
   border-radius: 10px;
   overflow:auto;
-  display: inline-block;
+}
+#chat-input {
+  padding:5px;
+  font-size:15px;
+  height:100%;
+  width:100%;
+  margin:auto;
+  position:relative;
+  text-align:center;
+  /*display: inline-block;*/
+  overflow:auto;
 }
 #send-button{
-  text-align:center;
-  height:75%;
   position:relative;
-  float:right;
-  margin-right:2%;
-  top:12.5%;
+  display:inline-block;
+  margin:auto;
+  text-align:center;
+  height:50%;
+  top:2px;
+  margin-right:2px;
   background-color: lightgreen;
   width: 10%;
 }
 #chat-log {
   border-top: 1px solid lightgrey;
-  padding-bottom: 4px;
+  padding-bottom: 0px;
   height:82%;
   position:relative;
-  background-color: rgb(88, 200, 211);
+  background-color: rgb(171, 223, 228);;
   text-align:auto;
   overflow:auto;
 }
@@ -80,7 +90,7 @@ body {
   width:100%;
   float:top;
   padding-bottom:1px;
-  background-color: rgb(88, 200, 211);
+  background-color: rgb(171, 223, 228);;
 }
 .icon{
   width:20px;

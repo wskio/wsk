@@ -11,8 +11,8 @@ var mapInit = function(){
     panControl: false,
     disableDoubleClickZoom: true,
     scrollwheel: false,
-    disableDefaultUI: true,
-    zoom: 18,
+    disableDefaultUI: false,
+    zoom: 17,
      mapTypeControlOptions: {
        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
      }

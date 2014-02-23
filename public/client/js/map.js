@@ -59,6 +59,7 @@ var mapInit = function(){
       var imageBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(initialLocation),
       new google.maps.LatLng(initialLocation));
+
       marker = new google.maps.Marker({
         position: initialLocation,
         title: 'Click to zoom'

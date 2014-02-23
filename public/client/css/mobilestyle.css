@@ -8,6 +8,8 @@ body {
 }
 #app-container{
   width:100%;
+  position:relative;
+  float:bottom;
   overflow:auto;
 }
 #map-canvas {
@@ -28,7 +30,7 @@ body {
 #chat-container {
   height:40%;
   width:100%;
-  position:absolute;
+  position:relative;
   bottom:0px;
   float:bottom;
   background-color:grey;

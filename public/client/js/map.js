@@ -27,15 +27,18 @@ var mapInit = function(){
     {
       stylers: [
         { color: "rgb(86, 94, 94)" },
-        { saturation: 100 }
+        { saturation: 100 },
+        { visibility: "simplified"}
       ]
     },
     {
-     featureType: "road.freeway",
+      featureType: 'road.freeway',
+      elementType: 'all',
       stylers: [
-        { color: "rgb(86, 94, 94)"},
-        { saturation: 100 }
-      ]
+        { hue: '#233961' },
+        { saturation: -53 },
+        { lightness: -60 }
+        ]
     },
     {
       featureType: "road",

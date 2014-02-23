@@ -197,4 +197,17 @@ var getAllPosts = function(){
       }
     }
   });
+  geo.offPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(){
+    console.log('a node has left the radius');
+  });
+};
+
+
+var updateMap = function(){
+  console.log('center was reset!');
+  getLocation();
+  myLoc = new google.maps.LatLng(myPosition.lat,myPosition.lon);
+  map.setCenter(myLoc);
 }
+
+setInterval(updateMap,10000);

@@ -148,7 +148,7 @@ var mapInit = function(){
       var neLat = nePoint.lat();
       var neLng = nePoint.lng();
 
-      var proximitymeter = google.maps.geometry.spherical.computeDistanceBetween(swPoint, nePoint)/2*0.5;
+      var proximitymeter = google.maps.geometry.spherical.computeDistanceBetween(swPoint, nePoint)/2*0.4;
       var proximitymiles = proximitymeter * 0.000621371192;
       proximity = proximitymiles;
       console.log("Proxmity " + proximity + " miles");

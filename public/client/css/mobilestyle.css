@@ -43,7 +43,7 @@ body {
   height:20%;
   position:relative;
   float:bottom;
-  border-top:1px solid lightgrey;
+  /*border-top:1px solid lightgrey;*/
   background-color: rgb(96, 137, 170);
 }
 #send-button{
@@ -78,7 +78,7 @@ body {
   position:relative;
   height:70%;
   width:69%;
-  top:7px;
+  top:14.5%;
   margin-left:15%;
   display:inline-block;
   background-color: white;

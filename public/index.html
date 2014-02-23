@@ -38,8 +38,8 @@
       var displayMessage = function(msg, color){
         if(msg.indexOf('.gif') !== -1 || msg.indexOf('.jpg') !== -1 || msg.indexOf('.bmp') !== -1 || msg.indexOf('.png') !== -1){
           var message = $('#chat-log').prepend($('<div class="messageContainer" style="opacity:0">')
-            .css({'margin-bottom':'20px','max-height':Math.floor($('#chat-log').height()*0.75) + 'px', 'width':'auto'})
-            .append($('<img class="message">').attr('src',msg).css({'max-width':'100%', 'max-height':'100%'})));
+            .css({/*'margin-bottom':'10px',*/'max-height':Math.floor($('#chat-log').height()*0.75) + 'px', 'width':'auto'})
+            .append($('<img class="message">').attr('src',msg).css({'max-width':Math.floor($('#chat-log').width()*0.85), 'max-height':Math.floor($('#chat-log').height()*0.65)})));
             // .css({'background-image':'url("'+msg+'")','height':Math.floor($('#chat-log').height()*0.75) + 'px','width':'auto','background-size':'100% 100%'})));
 
           // $('#chat-log').prepend($('<img max-height='+($('#chat-log').height*0.75)+'px src='+msg+'>'));

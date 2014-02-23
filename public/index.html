@@ -20,9 +20,7 @@
       <div id="chat-container">
         <div id="input-container">
           <div id="input-frame">
-            <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1">
-              >'.'<
-            </div>
+            <div id="chat-input" contenteditable="true" style="color:grey" tabindex="1"></div>
           </div>
           <div id="send-button">Send</div>
         </div>
@@ -57,18 +55,19 @@
 
         $('#chat-input').on('keypress',function(e){
           if (e.keyCode === 13 && $(this).text().length>0){
-            var currentTime = Date();
-            chatTimes.push(currentTime);
             e.preventDefault();
-            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$(this).text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
-            $(this).text('');
+            $('#send-button').trigger('click');
           }
         });
 
         $('#send-button').on('click',function(){
-          $('#chat-input').trigger('keypress');
+          if ($('#chat-input').text()){
+            var currentTime = Date();
+            chatTimes.push(currentTime);
+            geo.insertByLoc([myPosition.lat,myPosition.lon], {text:$('#chat-input').text(), position: [myPosition.lat,myPosition.lon], color: myColor, time: time()}, console.log('post was sent!'));
+            $('#chat-input').text('');
+          }
         });
-
       });
     </script>
   </body>

@@ -44,6 +44,12 @@ body {
   background-color: rgb(96, 137, 170);
 }
 #send-button{
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   line-height: 35px;
   position:relative;
   display:inline-block;
@@ -51,19 +57,24 @@ body {
   text-align:center;
   vertical-align: auto;
   height:70%;
-  top:15%;
+  top:7px;
   width: 12%;
   background-color: lightgreen;
   margin-left:1%;
   margin-right:1%;
   border-radius: 10px;
   overflow:auto;
+  border-bottom: 1px solid black
+}
+#send-button:active{
+  top:8px;
+  background-color:gold;
 }
 #input-frame{
   position:relative;
   height:70%;
   width:82%;
-  top:15%;
+  top:7px;
   margin-left:2%;
   display:inline-block;
   background-color: white;

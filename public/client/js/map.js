@@ -1,9 +1,10 @@
 var radiusCircle;
 var map;
 var user;
+var proximity;
+var initialLocation;
 
 var mapInit = function(){
-  var initialLocation;
   var siberia = new google.maps.LatLng(60, 105);
   var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
   var browserSupportFlag =  new Boolean();
@@ -11,7 +12,7 @@ var mapInit = function(){
   var myOptions = {
     maxZoom: 26,
     minZoom: 12,
-    draggable: true,
+    draggable: false,
     panControl: false,
     disableDoubleClickZoom: true,
     scrollwheel: false,
@@ -124,13 +125,13 @@ var mapInit = function(){
     map.setCenter(initialLocation);
   };
   google.maps.event.addDomListener(window, 'load', "initialize");
-  google.maps.event.addListener(map, 'center_changed', function() {
-    // 3 seconds after the center of the map has changed, pan back to the
-    // marker.
-    window.setTimeout(function() {
-      map.panTo(user.getPosition());
-    }, 3000);
-  });
+  // google.maps.event.addListener(map, 'center_changed', function() {
+  //   // 3 seconds after the center of the map has changed, pan back to the
+  //   // marker.
+  //   window.setTimeout(function() {
+  //     map.panTo(user.getPosition());
+  //   }, 3000);
+  // });
   google.maps.event.addListener(map, 'bounds_changed', function() {
     // 2 seconds after the zoom of the map has changed, adjust radius
     console.log('listening to bounds_changed');
@@ -147,13 +148,21 @@ var mapInit = function(){
       var neLat = nePoint.lat();
       var neLng = nePoint.lng();
 
-      var proximitymeter = google.maps.geometry.spherical.computeDistanceBetween(swPoint, nePoint);
+      var proximitymeter = google.maps.geometry.spherical.computeDistanceBetween(swPoint, nePoint)/2*0.5;
       var proximitymiles = proximitymeter * 0.000621371192;
       proximity = proximitymiles;
-      console.log("Proxmity " + proximitymiles + " miles");
+      console.log("Proxmity " + proximity + " miles");
+      radiusChange(proximitymeter);
     };
     setProximityFromMap();
   });
+  // google.maps.event.addListener(map, 'zoom_changed', function() {
+  //   // 3 seconds after the center of the map has changed, pan back to the
+  //   // marker.
+  //   window.setTimeout(function() {
+  //     radiusChange(proximity);
+  //   }, 3000);
+  // });
 }
 
 var allMarkers = [];
@@ -251,25 +260,15 @@ var getAllPosts = function(){
       }
     }
   });
-  geo.offPointsNearLoc([myPosition.lat, myPosition.lon], radiusCircle.radius * .001, function(){
-    console.log('a node has left the radius');
-  });
 };
 
-var radiusChange = function(zlvl){
+var radiusChange = function(rad){
   //zlvl is the new zoom number to which we need to update our radius to
 
   // below variable should do the math and get us the new radius
   // radius units = meters
-  var newLatDist = 0.162 * Math.pow(2, (12 - zlvl));
-  var newLonDist = 0.220 * Math.pow(2, (12 - zlvl));
-  var newRadius;
-
-  if(newLonDist > newLatDist){
-    newRadius = newLatDist*0.7;
-  } else {
-    newRadius = newLonDist*0.7;
-  }
+  var oldRad = radiusCircle.radius;
+  var oldPos = initialLocation;
 
   radiusCircle.setMap(null);
   var radiusOptions = {
@@ -279,11 +278,14 @@ var radiusChange = function(zlvl){
     fillColor: 'rgba(104, 181, 188, 0.39)',
     fillOpacity: 0.35,
     map: map,
-    center: initialLocation,
-    radius: 80,
+    center: map.position,
+    radius: rad,
   };
   radiusCircle = new google.maps.Circle(radiusOptions);
   //not close to finished
+  geo.offPointsNearLoc(oldPos, oldRad);
+  // geo.onPointsNearLoc(map.position, radiusOptions.radius);
+  getAllPosts();
   updateMap();
 };
 

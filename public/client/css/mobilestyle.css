@@ -24,13 +24,13 @@ body {
   left:0px;
   top:0px;
 }
-#banner {
-  position:absolute;
-  bottom:0px;
-  color: rgb(103, 199, 236);
-  height:20px;
-}
 #chat-container {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   height:40%;
   width:100%;
   position:relative;
@@ -40,6 +40,12 @@ body {
   border-top: 8px rgb(103, 199, 236);
 }
 #input-container{
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   height:20%;
   position:relative;
   float:bottom;
@@ -90,7 +96,8 @@ body {
   padding:5px;
   padding-top:8px;
   font-size:15px;
-  height:100%;
+  line-height:90%;
+  height:90%;
   width:95%;
   margin:auto;
   position:relative;

@@ -46,7 +46,6 @@
           $('.messageContainer').animate({'opacity':1});
           $('#chat-log').scrollTop();
         } else {
-          console.log("ITS A REGULAR MSG");
           var message = $('#chat-log').prepend($('<div class="messageContainer" style="opacity:0;color:#'+color+'">').append($('<div class="message">').text(msg)));
           $('.messageContainer').animate({'opacity':1});
           $('#chat-log').scrollTop();

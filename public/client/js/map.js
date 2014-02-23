@@ -12,7 +12,7 @@ var mapInit = function(){
     disableDoubleClickZoom: true,
     scrollwheel: false,
     disableDefaultUI: true,
-    zoom: 19,
+    zoom: 18,
      mapTypeControlOptions: {
        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
      }
@@ -71,7 +71,7 @@ var mapInit = function(){
         fillOpacity: 0.35,
         map: map,
         center: initialLocation,
-        radius: 50,
+        radius: 80,
       };
       radiusCircle = new google.maps.Circle(radiusOptions);
       marker.setMap(map);
